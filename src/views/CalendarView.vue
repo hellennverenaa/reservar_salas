@@ -1,10 +1,7 @@
 <template>
   <div class="calendar-view">
     <h2>Agenda de Reservas</h2>
-    <FullCalendar
-      :options="calendarOptions"
-      style="max-width: 900px; margin: 0 auto; background: #535151; border-radius: 8px; box-shadow: 0 2px 8px #0001;"
-    />
+<VCalendar/>
   </div> 
 </template>
 
@@ -13,10 +10,11 @@ import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { VCalendar } from 'vuetify/labs/VCalendar'
 
 export default {
   name: 'CalendarView',
-  components: { FullCalendar },
+  components: { FullCalendar, VCalendar },
   data() {
     return {
       calendarOptions: {
@@ -85,7 +83,7 @@ export default {
 .calendar-view {
   padding: 32px 0;
   min-height: 80vh;
-  background: #535151;
+  background:rgb(22, 4, 79)1;
 }
 .calendar-view h2 {
   text-align: center;

@@ -1,4 +1,5 @@
 <template>
+  <div></div>
   <div class="reserva-view">
     <div class="reserva-card">
       <h2>Reserve sua Sala</h2>
@@ -73,7 +74,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(120deg, #42b983 0%, #369870 100%);
+  background: linear-gradient(120deg, #6d3acb 0%, #2a135b 100%);
 }
 .reserva-card {
   background: #fff;
@@ -89,7 +90,7 @@ export default {
 }
 .reserva-card h2 {
   margin-bottom: 24px;
-  color: #42b983;
+  color: #362d8b;
 }
 .form-group {
   width: 100%;
@@ -113,12 +114,12 @@ export default {
 }
 .form-group input:focus,
 .form-group select:focus {
-  border: 1.5px solid #42b983;
+  border: 1.5px solid #25065f;
 }
 .btn-reservar {
   width: 100%;
   padding: 12px;
-  background: #42b983;
+  background: #25065f;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -129,11 +130,11 @@ export default {
   transition: background 0.2s;
 }
 .btn-reservar:hover {
-  background: #369870;
+  background: #14165f;
 }
 .mensagem {
   margin-top: 18px;
-  color: #369870;
+  color: #150267;
   font-weight: 600;
   text-align: center;
 }

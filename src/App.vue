@@ -5,13 +5,11 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    
-
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/calendario">Calendário</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        
       </nav>
     </div>
   </header>
@@ -22,7 +20,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 header {
   width: 100%;
-  background: linear-gradient(90deg, #42b983 0%, #369870 100%);
+  background: linear-gradient(90deg, #6d3acb 0%, #2a135b 100%);
   box-shadow: 0 2px 12px #0001;
   padding: 0;
   position: sticky;
@@ -50,7 +48,7 @@ nav {
 }
 
 nav a {
-  color: #fff;
+  color: #2a135b;
   background: rgba(255,255,255,0.08);
   padding: 0.6rem 1.3rem;
   border-radius: 24px;
@@ -62,13 +60,13 @@ nav a {
 }
 nav a.router-link-exact-active,
 nav a.router-link-active {
-  background: #fff;
-  color: #42b983;
+  background: #2a135b;
+  color: #fafafa;
   font-weight: 700;
   box-shadow: 0 2px 8px #0001;
 }
 nav a:hover {
-  background: #369870;
+  background: #2a135b;
   color: #fff;
 }
 
@@ -86,3 +84,4 @@ nav a:hover {
   }
 }
 </style>
+

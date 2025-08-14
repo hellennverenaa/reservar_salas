@@ -1,9 +1,8 @@
 
-
 <template>
   <div class="home-view">
     <div class="home-card">
-      <h1>Bem-vindo ao Sistema de Reservas de Salas</h1>
+      <h1>Bem-vindo! Reserve sua Sala</h1>
       <p>Organize suas reuniões e eventos de forma fácil e rápida.</p>
       <router-link to="/reserva">
         <button class="btn-reservar">Reserve sua sala</button>
@@ -24,7 +23,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(120deg, #42b983 0%, #369870 100%);
+  background: linear-gradient(120deg, #6d3acb 0%, #2a135b 100%);
 }
 .home-card {
   background: #fff;
@@ -40,18 +39,18 @@ export default {
 }
 .home-card h1 {
   margin-bottom: 18px;
-  color: #42b983;
+  color: #362d8b;
   text-align: center;
 }
 .home-card p {
   margin-bottom: 28px;
-  color: #444;
+  color: #454545;
   text-align: center;
   font-size: 1.1rem;
 }
 .btn-reservar {
   padding: 14px 36px;
-  background: #42b983;
+  background: #1b0f74;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -62,7 +61,7 @@ export default {
   box-shadow: 0 2px 8px #0001;
 }
 .btn-reservar:hover {
-  background: #369870;
+  background: #130439;
 }
 </style>
 
