@@ -3,21 +3,38 @@
   <div class="reserva-view">
     <div class="reserva-card">
       <h2>Reserve sua Sala</h2>
+
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
           <label for="responsavel">Responsável</label>
           <input v-model="form.responsavel" id="responsavel" required placeholder="Nome do responsável" />
         </div>
         <div class="form-group">
+          <label for="Qual">Qual será o tipo de evento/atividade? (Reunião, treinamento, apresentação, entrevista,
+            etc.)</label>
+          <input v-model="form.tipoevento" id="tipoevento" required placeholder="Título" />
+        </div>
+        <div class="form-group">
           <label for="data">Data</label>
           <input v-model="form.data" id="data" type="date" required />
         </div>
         <div class="form-group">
-          <label for="hora">Hora</label>
+          <label for="hora">Hora de Inicio</label>
           <input v-model="form.hora" id="hora" type="time" required />
         </div>
         <div class="form-group">
-          <label for="quantidade">Quantidade de Pessoas</label>
+          <label for="hora">Hora Final</label>
+          <input v-model="form.hora" id="hora" type="time" required />
+        </div>
+        <div class="form-group">
+          <label for="participantes">Quem serão os participantes?</label>
+          <select v-model="form.participantes" id="participantes" required>
+            <option disabled value="">Selecione os participantes</option>
+            <option v-for="lider in lider" :key="lider" :value="lider">{{ lider }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="quantidade">Número de Participantes</label>
           <input v-model.number="form.quantidade" id="quantidade" type="number" min="1" required />
         </div>
         <div class="form-group">
@@ -27,8 +44,18 @@
             <option v-for="sala in salas" :key="sala" :value="sala">{{ sala }}</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="Cafe">Deseja Café?</label>
+          <select v-model="form.cafe" id="cafe" required>
+            <option disabled value="">Selecione</option>
+            <option v-for="opcao in cafe" :key="opcao" :value="opcao">{{ opcao }}</option>
+          </select>
+
+        </div>
+
         <button class="btn-reservar" type="submit">Reservar</button>
       </form>
+
       <div v-if="mensagem" class="mensagem">{{ mensagem }}</div>
     </div>
   </div>
@@ -44,28 +71,52 @@ export default {
         data: '',
         hora: '',
         quantidade: 1,
-        sala: ''
+        sala: '',
+        cafe: '',
       },
-      salas: ['Sala 1', 'Sala 2', 'Sala 3', 'Sala de Reunião'],
+
+      salas: [
+        'Sala Paixão',
+        'Respeito',
+        'Auditório F1',
+        'Auditório F2',
+        'Auditório F3',
+        'Hoshin',
+        'Sala ADM',
+        'Sala RH',
+        'Sala Manutenção',
+        'Sala NIKE',
+        'Sala do BIP'
+      ],
+
+      cafe: [
+        'Sim', 
+       'Não'
+      ],
       mensagem: ''
     }
   },
+
   methods: {
     handleSubmit() {
+      console.log(this.form)
       // Aqui você pode salvar a reserva em um backend ou localStorage
-      this.mensagem = `Reserva feita para ${this.form.sala} em ${this.form.data} às ${this.form.hora}!`;
-      // Limpa o formulário após reservar
-      this.form = {
-        responsavel: '',
-        data: '',
-        hora: '',
-        quantidade: 1,
-        sala: ''
-      };
-      setTimeout(() => this.mensagem = '', 4000);
+      // this.mensagem = `Reserva feita para ${this.form.sala} em ${this.form.data} às ${this.form.hora}!`;
+      // // Limpa o formulário após reservar
+      // this.form = {
+      //   responsavel: '',
+      //   data: '',
+      //   hora: '',
+      //   quantidade: 1,
+      //   sala: ''
+      // };
+      // setTimeout(() => this.mensagem = '', 4000);
     }
   }
+
+
 }
+
 </script>
 
 <style scoped>
@@ -76,6 +127,7 @@ export default {
   justify-content: center;
   background: linear-gradient(120deg, #6d3acb 0%, #2a135b 100%);
 }
+
 .reserva-card {
   background: #fff;
   padding: 40px 32px 32px 32px;
@@ -88,21 +140,25 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
 .reserva-card h2 {
   margin-bottom: 24px;
   color: #362d8b;
 }
+
 .form-group {
   width: 100%;
   margin-bottom: 18px;
   display: flex;
   flex-direction: column;
 }
+
 .form-group label {
   margin-bottom: 6px;
   font-weight: 500;
   color: #333;
 }
+
 .form-group input,
 .form-group select {
   padding: 10px 12px;
@@ -112,10 +168,12 @@ export default {
   outline: none;
   transition: border 0.2s;
 }
+
 .form-group input:focus,
 .form-group select:focus {
   border: 1.5px solid #25065f;
 }
+
 .btn-reservar {
   width: 100%;
   padding: 12px;
@@ -129,9 +187,11 @@ export default {
   margin-top: 10px;
   transition: background 0.2s;
 }
+
 .btn-reservar:hover {
   background: #14165f;
 }
+
 .mensagem {
   margin-top: 18px;
   color: #150267;
