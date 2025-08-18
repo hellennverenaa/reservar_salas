@@ -8,12 +8,6 @@
           <label for="responsavel">Responsável</label>
           <input v-model="form.responsavel" id="responsavel" required placeholder="Nome do responsável" />
         </div>
-        
-        <div class="form-group">
-          <label for="tipoevento">Qual será o tipo de evento/atividade?</label>
-          <input v-model="form.tipoevento" id="tipoevento" required placeholder="Reunião, treinamento, apresentação..." />
-        </div>
-        
         <div class="form-group">
           <label for="Qual">Qual será o tipo de evento/atividade? (Reunião, treinamento, apresentação, entrevista,
             etc.)</label>
@@ -23,17 +17,17 @@
           <label for="data">Data</label>
           <input v-model="form.data" id="data" type="date" required />
         </div>
-        
+
         <div class="form-group">
           <label for="horaInicio">Hora de Início</label>
           <input v-model="form.horaInicio" id="horaInicio" type="time" required />
         </div>
-        
+
         <div class="form-group">
           <label for="horaFinal">Hora Final</label>
           <input v-model="form.horaFinal" id="horaFinal" type="time" required />
         </div>
-        
+
         <div class="form-group">
 
           <label for="participantes">Quem serão os participantes?</label>
@@ -44,23 +38,11 @@
             </option>
           </select>
         </div>
-        
-        <div class="form-group">
-          <label for="hora">Hora Final</label>
-          <input v-model="form.hora" id="hora" type="time" required />
-        </div>
-        <div class="form-group">
-          <label for="participantes">Quem serão os participantes?</label>
-          <select v-model="form.participantes" id="participantes" required>
-            <option disabled value="">Selecione os participantes</option>
-            <option v-for="lider in lider" :key="lider" :value="lider">{{ lider }}</option>
-          </select>
-        </div>
         <div class="form-group">
           <label for="quantidade">Número de Participantes</label>
           <input v-model.number="form.quantidade" id="quantidade" type="number" min="1" required />
         </div>
-        
+
         <div class="form-group">
           <label for="sala">Sala</label>
           <select v-model="form.sala" id="sala" required>
@@ -68,7 +50,7 @@
             <option v-for="sala in salas" :key="sala" :value="sala">{{ sala }}</option>
           </select>
         </div>
-        
+
         <div class="form-group">
           <label for="cafe">Deseja Café?</label>
           <select v-model="form.cafe" id="cafe" required>
@@ -133,8 +115,65 @@ export default {
         'Workshops'
       ],
       cafeOpcoes: [
-        'Sim', 
+        'Sim',
         'Não'
+      ],
+      reservas: [
+        {
+          "responsavel": "Ana Souza",
+          "tipoevento": "Treinamento",
+          "data": "2025-08-20",
+          "horaInicio": "09:00",
+          "horaFinal": "12:00",
+          "participantes": "Equipe de Vendas",
+          "quantidade": 15,
+          "sala": "Sala Paixão",
+          "cafe": "Sim"
+        },
+        {
+          "responsavel": "Carlos Lima",
+          "tipoevento": "Reunião de Diretoria",
+          "data": "2025-08-21",
+          "horaInicio": "14:00",
+          "horaFinal": "16:00",
+          "participantes": "Diretoria Executiva",
+          "quantidade": 8,
+          "sala": "Auditório F1",
+          "cafe": "Não"
+        },
+        {
+          "responsavel": "Fernanda Oliveira",
+          "tipoevento": "Workshop de Inovação",
+          "data": "2025-08-22",
+          "horaInicio": "10:30",
+          "horaFinal": "13:30",
+          "participantes": "TI + Marketing",
+          "quantidade": 25,
+          "sala": "Auditório F2",
+          "cafe": "Sim"
+        },
+        {
+          "responsavel": "Ricardo Martins",
+          "tipoevento": "Apresentação de Projeto",
+          "data": "2025-08-23",
+          "horaInicio": "15:00",
+          "horaFinal": "17:00",
+          "participantes": "Equipe de Desenvolvimento",
+          "quantidade": 12,
+          "sala": "Respeito",
+          "cafe": "Não"
+        },
+        {
+          "responsavel": "Juliana Costa",
+          "tipoevento": "Palestra Motivacional",
+          "data": "2025-08-24",
+          "horaInicio": "08:00",
+          "horaFinal": "11:00",
+          "participantes": "Todos os Colaboradores",
+          "quantidade": 50,
+          "sala": "Auditório F3",
+          "cafe": "Sim"
+        }
       ],
       mensagem: '',
       tipoMensagem: 'sucesso',
@@ -145,39 +184,34 @@ export default {
   methods: {
     handleSubmit() {
       console.log('Iniciando handleSubmit...');
-      
+
       try {
-        console.log('Dados do formulário:', this.form);
-        
         if (!this.validarFormulario()) {
           console.log('Validação falhou');
           return;
         }
         console.log('Validação passou');
-        
+
         this.carregando = true;
-        
-        // Simular salvamento (por enquanto apenas console)
+
         const dadosParaSalvar = {
           id: Date.now().toString(),
           ...this.form,
           criadoEm: new Date().toISOString()
         };
-        
+
         console.log('Dados que seriam salvos:', dadosParaSalvar);
-        
+
         // Por enquanto, vamos apenas simular o sucesso
-        setTimeout(() => {
-          this.mostrarMensagem(
-            `Reserva feita para ${this.form.sala} em ${this.formatarData(this.form.data)}!`,
-            'sucesso'
-          );
-          this.limparFormulario();
-          this.carregando = false;
-        }, 1000);
-        
-        console.log('handleSubmit executado com sucesso');
-        
+        // setTimeout(() => {
+        //   this.mostrarMensagem(
+        //     `Reserva feita para ${this.form.sala} em ${this.formatarData(this.form.data)}!`,
+        //     'sucesso'
+        //   );
+        //   this.limparFormulario();
+        //   this.carregando = false;
+        // }, 1000);
+
       } catch (error) {
         console.error('Erro capturado no handleSubmit:', error);
         this.mostrarMensagem('Erro: ' + error.message, 'erro');
@@ -187,10 +221,10 @@ export default {
 
     validarFormulario() {
       console.log('Iniciando validação...');
-      
+
       try {
         const camposObrigatorios = ['responsavel', 'tipoevento', 'data', 'horaInicio', 'horaFinal', 'sala'];
-        
+
         for (let campo of camposObrigatorios) {
           if (!this.form[campo]) {
             this.mostrarMensagem(`Campo obrigatório não preenchido: ${campo}`, 'erro');
@@ -198,16 +232,16 @@ export default {
             return false;
           }
         }
-        
+
         if (this.form.horaFinal <= this.form.horaInicio) {
           this.mostrarMensagem('Hora final deve ser maior que hora inicial!', 'erro');
           console.log('Erro de validação: horário inválido');
           return false;
         }
-        
+
         console.log('Validação OK');
         return true;
-        
+
       } catch (error) {
         console.error('Erro na validação:', error);
         return false;
@@ -216,7 +250,7 @@ export default {
 
     mostrarMensagem(texto, tipo = 'sucesso') {
       console.log(`Mostrando mensagem (${tipo}): ${texto}`);
-      
+
       try {
         this.mensagem = texto;
         this.tipoMensagem = tipo;
