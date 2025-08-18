@@ -7,7 +7,7 @@ const router = createRouter({
   routes: [
     {
       path: '/reserva',
-      name: 'reserva',
+      name: 'reservar',
       component: () => import('../views/ReservaView.vue'),
     },
     {
@@ -17,7 +17,7 @@ const router = createRouter({
     },
     {
       path: '/calendario',
-      name: 'calendario',
+      name: 'Calendario',
       component: () => import('../views/CalendarView.vue'),
     },
 

@@ -1,5 +1,4 @@
 <template>
-  <div></div>
   <div class="reserva-view">
     <div class="reserva-card">
       <h2>Reserve sua Sala</h2>
@@ -9,6 +8,12 @@
           <label for="responsavel">Responsável</label>
           <input v-model="form.responsavel" id="responsavel" required placeholder="Nome do responsável" />
         </div>
+        
+        <div class="form-group">
+          <label for="tipoevento">Qual será o tipo de evento/atividade?</label>
+          <input v-model="form.tipoevento" id="tipoevento" required placeholder="Reunião, treinamento, apresentação..." />
+        </div>
+        
         <div class="form-group">
           <label for="Qual">Qual será o tipo de evento/atividade? (Reunião, treinamento, apresentação, entrevista,
             etc.)</label>
@@ -18,10 +23,28 @@
           <label for="data">Data</label>
           <input v-model="form.data" id="data" type="date" required />
         </div>
+        
         <div class="form-group">
-          <label for="hora">Hora de Inicio</label>
-          <input v-model="form.hora" id="hora" type="time" required />
+          <label for="horaInicio">Hora de Início</label>
+          <input v-model="form.horaInicio" id="horaInicio" type="time" required />
         </div>
+        
+        <div class="form-group">
+          <label for="horaFinal">Hora Final</label>
+          <input v-model="form.horaFinal" id="horaFinal" type="time" required />
+        </div>
+        
+        <div class="form-group">
+
+          <label for="participantes">Quem serão os participantes?</label>
+          <select v-model="form.participantes" id="participantes" required>
+            <option disabled value="">Selecione os participantes</option>
+            <option v-for="participante in participantesList" :key="participante" :value="participante">
+              {{ participante }}
+            </option>
+          </select>
+        </div>
+        
         <div class="form-group">
           <label for="hora">Hora Final</label>
           <input v-model="form.hora" id="hora" type="time" required />
@@ -37,6 +60,7 @@
           <label for="quantidade">Número de Participantes</label>
           <input v-model.number="form.quantidade" id="quantidade" type="number" min="1" required />
         </div>
+        
         <div class="form-group">
           <label for="sala">Sala</label>
           <select v-model="form.sala" id="sala" required>
@@ -44,19 +68,23 @@
             <option v-for="sala in salas" :key="sala" :value="sala">{{ sala }}</option>
           </select>
         </div>
+        
         <div class="form-group">
-          <label for="Cafe">Deseja Café?</label>
+          <label for="cafe">Deseja Café?</label>
           <select v-model="form.cafe" id="cafe" required>
             <option disabled value="">Selecione</option>
-            <option v-for="opcao in cafe" :key="opcao" :value="opcao">{{ opcao }}</option>
+            <option v-for="opcao in cafeOpcoes" :key="opcao" :value="opcao">{{ opcao }}</option>
           </select>
-
         </div>
 
-        <button class="btn-reservar" type="submit">Reservar</button>
+        <button class="btn-reservar" type="submit" :disabled="carregando">
+          {{ carregando ? 'Salvando...' : 'Reservar' }}
+        </button>
       </form>
 
-      <div v-if="mensagem" class="mensagem">{{ mensagem }}</div>
+      <div v-if="mensagem" :class="['mensagem', tipoMensagem]">
+        {{ mensagem }}
+      </div>
     </div>
   </div>
 </template>
@@ -68,13 +96,15 @@ export default {
     return {
       form: {
         responsavel: '',
+        tipoevento: '',
         data: '',
-        hora: '',
+        horaInicio: '',
+        horaFinal: '',
+        participantes: '',
         quantidade: 1,
         sala: '',
-        cafe: '',
+        cafe: ''
       },
-
       salas: [
         'Sala Paixão',
         'Respeito',
@@ -88,29 +118,133 @@ export default {
         'Sala NIKE',
         'Sala do BIP'
       ],
-
-      cafe: [
-        'Sim', 
-       'Não'
+      participantesList: [
+        'Colaboradores específicos',
+        'Auxiliares',
+        'Coordenadores',
+        'Gerentes',
+        'Áreas de Apoio',
+        'Colaboradores',
+        'Aprendizes',
+        'Líderes e Coordenadores',
+        'Mecânicos',
+        'Processos Seletivos',
+        'Visitas',
+        'Workshops'
       ],
-      mensagem: ''
+      cafeOpcoes: [
+        'Sim', 
+        'Não'
+      ],
+      mensagem: '',
+      tipoMensagem: 'sucesso',
+      carregando: false
     }
   },
 
   methods: {
     handleSubmit() {
-      console.log(this.form)
-      // Aqui você pode salvar a reserva em um backend ou localStorage
-      // this.mensagem = `Reserva feita para ${this.form.sala} em ${this.form.data} às ${this.form.hora}!`;
-      // // Limpa o formulário após reservar
-      // this.form = {
-      //   responsavel: '',
-      //   data: '',
-      //   hora: '',
-      //   quantidade: 1,
-      //   sala: ''
-      // };
-      // setTimeout(() => this.mensagem = '', 4000);
+      console.log('Iniciando handleSubmit...');
+      
+      try {
+        console.log('Dados do formulário:', this.form);
+        
+        if (!this.validarFormulario()) {
+          console.log('Validação falhou');
+          return;
+        }
+        console.log('Validação passou');
+        
+        this.carregando = true;
+        
+        // Simular salvamento (por enquanto apenas console)
+        const dadosParaSalvar = {
+          id: Date.now().toString(),
+          ...this.form,
+          criadoEm: new Date().toISOString()
+        };
+        
+        console.log('Dados que seriam salvos:', dadosParaSalvar);
+        
+        // Por enquanto, vamos apenas simular o sucesso
+        setTimeout(() => {
+          this.mostrarMensagem(
+            `Reserva feita para ${this.form.sala} em ${this.formatarData(this.form.data)}!`,
+            'sucesso'
+          );
+          this.limparFormulario();
+          this.carregando = false;
+        }, 1000);
+        
+        console.log('handleSubmit executado com sucesso');
+        
+      } catch (error) {
+        console.error('Erro capturado no handleSubmit:', error);
+        this.mostrarMensagem('Erro: ' + error.message, 'erro');
+        this.carregando = false;
+      }
+    },
+
+    validarFormulario() {
+      console.log('Iniciando validação...');
+      
+      try {
+        const camposObrigatorios = ['responsavel', 'tipoevento', 'data', 'horaInicio', 'horaFinal', 'sala'];
+        
+        for (let campo of camposObrigatorios) {
+          if (!this.form[campo]) {
+            this.mostrarMensagem(`Campo obrigatório não preenchido: ${campo}`, 'erro');
+            console.log(`Campo vazio: ${campo}`);
+            return false;
+          }
+        }
+        
+        if (this.form.horaFinal <= this.form.horaInicio) {
+          this.mostrarMensagem('Hora final deve ser maior que hora inicial!', 'erro');
+          console.log('Erro de validação: horário inválido');
+          return false;
+        }
+        
+        console.log('Validação OK');
+        return true;
+        
+      } catch (error) {
+        console.error('Erro na validação:', error);
+        return false;
+      }
+    },
+
+    mostrarMensagem(texto, tipo = 'sucesso') {
+      console.log(`Mostrando mensagem (${tipo}): ${texto}`);
+      
+      try {
+        this.mensagem = texto;
+        this.tipoMensagem = tipo;
+        setTimeout(() => {
+          this.mensagem = '';
+          console.log('Mensagem limpa');
+        }, 5000);
+      } catch (error) {
+        console.error('Erro ao mostrar mensagem:', error);
+      }
+    },
+
+    limparFormulario() {
+      this.form = {
+        responsavel: '',
+        tipoevento: '',
+        data: '',
+        horaInicio: '',
+        horaFinal: '',
+        participantes: '',
+        quantidade: 1,
+        sala: '',
+        cafe: ''
+      };
+    },
+
+    formatarData(data) {
+      return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
     }
   }
 
@@ -192,10 +326,28 @@ export default {
   background: #14165f;
 }
 
+.btn-reservar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .mensagem {
   margin-top: 18px;
-  color: #150267;
   font-weight: 600;
   text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.mensagem.erro {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border-left: 4px solid #d32f2f;
+}
+
+.mensagem.sucesso {
+  color: #2e7d32;
+  background-color: #e8f5e8;
+  border-left: 4px solid #2e7d32;
 }
 </style>
