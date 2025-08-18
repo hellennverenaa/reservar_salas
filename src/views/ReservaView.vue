@@ -15,6 +15,11 @@
         </div>
         
         <div class="form-group">
+          <label for="Qual">Qual será o tipo de evento/atividade? (Reunião, treinamento, apresentação, entrevista,
+            etc.)</label>
+          <input v-model="form.tipoevento" id="tipoevento" required placeholder="Título" />
+        </div>
+        <div class="form-group">
           <label for="data">Data</label>
           <input v-model="form.data" id="data" type="date" required />
         </div>
@@ -30,6 +35,7 @@
         </div>
         
         <div class="form-group">
+
           <label for="participantes">Quem serão os participantes?</label>
           <select v-model="form.participantes" id="participantes" required>
             <option disabled value="">Selecione os participantes</option>
@@ -39,6 +45,17 @@
           </select>
         </div>
         
+        <div class="form-group">
+          <label for="hora">Hora Final</label>
+          <input v-model="form.hora" id="hora" type="time" required />
+        </div>
+        <div class="form-group">
+          <label for="participantes">Quem serão os participantes?</label>
+          <select v-model="form.participantes" id="participantes" required>
+            <option disabled value="">Selecione os participantes</option>
+            <option v-for="lider in lider" :key="lider" :value="lider">{{ lider }}</option>
+          </select>
+        </div>
         <div class="form-group">
           <label for="quantidade">Número de Participantes</label>
           <input v-model.number="form.quantidade" id="quantidade" type="number" min="1" required />
@@ -124,6 +141,7 @@ export default {
       carregando: false
     }
   },
+
   methods: {
     handleSubmit() {
       console.log('Iniciando handleSubmit...');
@@ -229,7 +247,10 @@ export default {
       return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
     }
   }
+
+
 }
+
 </script>
 
 <style scoped>
