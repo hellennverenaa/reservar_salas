@@ -77,8 +77,8 @@ export default {
   data() {
     return {
       form: {
-        responsavel: '',
-        tipoevento: '',
+        responsavel: 'hellen',
+        tipoevento: 'festa',
         data: '',
         horaInicio: '',
         horaFinal: '',
@@ -131,39 +131,6 @@ export default {
           "cafe": "Sim"
         },
         {
-          "responsavel": "Carlos Lima",
-          "tipoevento": "Reunião de Diretoria",
-          "data": "2025-08-21",
-          "horaInicio": "14:00",
-          "horaFinal": "16:00",
-          "participantes": "Diretoria Executiva",
-          "quantidade": 8,
-          "sala": "Auditório F1",
-          "cafe": "Não"
-        },
-        {
-          "responsavel": "Fernanda Oliveira",
-          "tipoevento": "Workshop de Inovação",
-          "data": "2025-08-22",
-          "horaInicio": "10:30",
-          "horaFinal": "13:30",
-          "participantes": "TI + Marketing",
-          "quantidade": 25,
-          "sala": "Auditório F2",
-          "cafe": "Sim"
-        },
-        {
-          "responsavel": "Ricardo Martins",
-          "tipoevento": "Apresentação de Projeto",
-          "data": "2025-08-23",
-          "horaInicio": "15:00",
-          "horaFinal": "17:00",
-          "participantes": "Equipe de Desenvolvimento",
-          "quantidade": 12,
-          "sala": "Respeito",
-          "cafe": "Não"
-        },
-        {
           "responsavel": "Juliana Costa",
           "tipoevento": "Palestra Motivacional",
           "data": "2025-08-24",
@@ -182,43 +149,6 @@ export default {
   },
 
   methods: {
-    handleSubmit() {
-      console.log('Iniciando handleSubmit...');
-
-      try {
-        if (!this.validarFormulario()) {
-          console.log('Validação falhou');
-          return;
-        }
-        console.log('Validação passou');
-
-        this.carregando = true;
-
-        const dadosParaSalvar = {
-          id: Date.now().toString(),
-          ...this.form,
-          criadoEm: new Date().toISOString()
-        };
-
-        console.log('Dados que seriam salvos:', dadosParaSalvar);
-
-        // Por enquanto, vamos apenas simular o sucesso
-        // setTimeout(() => {
-        //   this.mostrarMensagem(
-        //     `Reserva feita para ${this.form.sala} em ${this.formatarData(this.form.data)}!`,
-        //     'sucesso'
-        //   );
-        //   this.limparFormulario();
-        //   this.carregando = false;
-        // }, 1000);
-
-      } catch (error) {
-        console.error('Erro capturado no handleSubmit:', error);
-        this.mostrarMensagem('Erro: ' + error.message, 'erro');
-        this.carregando = false;
-      }
-    },
-
     validarFormulario() {
       console.log('Iniciando validação...');
 
@@ -279,10 +209,50 @@ export default {
 
     formatarData(data) {
       return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
-    }
-  }
+    },
+
+    handleSubmit() {
+      console.log('Iniciando handleSubmit...');
+      try {
+        if (!this.validarFormulario()) {
+          console.log('Validação falhou');
+          return;
+        }
+        console.log('Validação passou');
+
+        this.carregando = true;
+
+        const chave = 'reservas_salas'
+        const lista = JSON.parse(localStorage.getItem(chave) || '[]')
+
+        const reserva = {
+          ...this.form,
+          criadoEm: new Date().toISOString()
+        };
+
+        if (!reserva.id) reserva.id = crypto.randomUUID();
+
+        const idx = lista.findIndex(r => r.id === reserva.id);
+        if (idx >= 0) {
+          console.warn("Reserva ja existente, subtituindo...");
+
+          lista[idx] = reserva;
+        } else {
+          lista.push(reserva);
+        }
+
+        localStorage.setItem(chave, JSON.stringify(lista));
 
 
+        // avisa o calendário
+        window.dispatchEvent(new CustomEvent('reserva-adicionada'));
+      } catch (error) {
+        console.error('Erro capturado no handleSubmit:', error);
+        this.mostrarMensagem('Erro: ' + error.message, 'erro');
+        this.carregando = false;
+      }
+    },
+  },
 }
 
 </script>

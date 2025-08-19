@@ -9,13 +9,10 @@
         </button>
       </div>
     </div>
-    
+
     <!-- FullCalendar -->
-    <FullCalendar 
-      :options="calendarOptions" 
-      ref="fullCalendar"
-    />
-    
+    <FullCalendar :options="calendarOptions" ref="fullCalendar" />
+
     <!-- Modal de Detalhes da Reserva -->
     <div v-if="modalAberto" class="modal-overlay" @click="fecharModal">
       <div class="modal-content" @click.stop>
@@ -23,7 +20,7 @@
           <h3>Detalhes da Reserva</h3>
           <button @click="fecharModal" class="btn-fechar-modal">×</button>
         </div>
-        
+
         <div class="reserva-detalhes" v-if="reservaSelecionada">
           <div class="detalhe-item">
             <strong>Sala:</strong> {{ reservaSelecionada.sala }}
@@ -50,7 +47,7 @@
             <strong>Café:</strong> {{ reservaSelecionada.cafe }}
           </div>
         </div>
-        
+
         <div class="modal-acoes">
           <button @click="editarReserva" class="btn-editar">Editar</button>
           <button @click="excluirReserva" class="btn-excluir">Excluir</button>
@@ -70,7 +67,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -82,7 +79,7 @@ import ptBrLocale from '@fullcalendar/core/locales/pt-br'
 
 export default {
   name: 'CalendarView',
-  components: { 
+  components: {
     FullCalendar
   },
   data() {
@@ -121,41 +118,46 @@ export default {
       }
     }
   },
-  
+
   mounted() {
     console.log('Calendar montado, carregando eventos...');
+    this.seedReservasSeVazio();
     this.atualizarEventos();
-    
+
     // Escutar mudanças no localStorage (quando outra aba adiciona/remove reservas)
     window.addEventListener('storage', this.onStorageChange);
-    
+
     // Escutar eventos customizados (quando a própria aba adiciona reservas)
     window.addEventListener('reserva-adicionada', this.atualizarEventos);
     window.addEventListener('reserva-removida', this.atualizarEventos);
   },
-  
+
   beforeUnmount() {
     window.removeEventListener('storage', this.onStorageChange);
     window.removeEventListener('reserva-adicionada', this.atualizarEventos);
     window.removeEventListener('reserva-removida', this.atualizarEventos);
   },
-  
+
   methods: {
     getReservas() {
       try {
         const reservas = JSON.parse(localStorage.getItem('reservas_salas') || '[]');
         console.log('Reservas carregadas:', reservas);
-        
+
         return reservas.map(reserva => {
+
+          const startStr = `${reserva.data}T${reserva.horaInicio}:00`;
+          const endStr = `${reserva.data}T${reserva.horaFinal}:00`;
+
           // Calcular duração do evento
           const inicio = new Date(`${reserva.data}T${reserva.horaInicio}`);
           const fim = new Date(`${reserva.data}T${reserva.horaFinal}`);
-          
+
           return {
             id: reserva.id,
             title: `${reserva.sala}`,
-            start: inicio.toISOString(),
-            end: fim.toISOString(),
+            start: startStr, // <-- sem toISOString()
+            end: endStr,     // <-- sem toISOString()
             allDay: false,
             backgroundColor: this.getCorPorSala(reserva.sala),
             borderColor: this.getCorPorSala(reserva.sala),
@@ -170,8 +172,17 @@ export default {
         return [];
       }
     },
-    
-    getCorPorSala(sala) {
+    seedReservasSeVazio() {
+      const chave = 'reservas_salas';
+      const atual = JSON.parse(localStorage.getItem(chave) || '[]');
+      if (atual.length > 0) return;
+
+      const agora = new Date();
+      const yyyy = agora.getFullYear();
+      const mm = String(agora.getMonth() + 1).padStart(2, '0');
+      const dd = String(agora.getDate()).padStart(2, '0');
+
+      getCorPorSala(sala)
       // Cores diferentes para cada sala
       const cores = {
         'Sala Paixão': '#e91e63',
@@ -186,32 +197,34 @@ export default {
         'Sala NIKE': '#ffeb3b',
         'Sala do BIP': '#ff9800'
       };
+
+      localStorage.setItem(chave, JSON.stringify(exemplo));
       return cores[sala] || '#25065f';
     },
-    
+
     customizeEvent(info) {
       // Adicionar informações extras ao evento no calendário
       const reserva = info.event.extendedProps.reserva;
-      
+
       // Adicionar tooltip
       info.el.title = `${reserva.responsavel} - ${reserva.tipoevento}\n${reserva.horaInicio} às ${reserva.horaFinal}`;
-      
+
       // Adicionar classe CSS personalizada se necessário
       info.el.classList.add('evento-reserva');
     },
-    
+
     atualizarEventos() {
       console.log('Atualizando eventos do calendário...');
-      
+
       const eventos = this.getReservas();
       console.log('Eventos para o calendário:', eventos);
-      
+
       // Atualizar eventos no FullCalendar
       this.calendarOptions = {
         ...this.calendarOptions,
         events: eventos
       };
-      
+
       // Forçar re-render do calendário se já estiver montado
       this.$nextTick(() => {
         if (this.$refs.fullCalendar) {
@@ -221,58 +234,58 @@ export default {
         }
       });
     },
-    
+
     onStorageChange(event) {
       if (event.key === 'reservas_salas') {
         console.log('Detectada mudança no localStorage, atualizando...');
         this.atualizarEventos();
       }
     },
-    
+
     handleDateSelect(info) {
       console.log('Data selecionada:', info.startStr);
-      
+
       // Redirecionar para página de reserva com a data pré-preenchida
       const data = info.startStr.split('T')[0]; // Pegar apenas a parte da data
-      
+
       // Se você estiver usando Vue Router:
-      this.$router.push({ 
-        name: 'Reservar', 
+      this.$router.push({
+        name: 'Reservar',
         query: { data: data }
       });
-      
+
       // Ou simplesmente mostrar um alerta por enquanto:
-      // alert(`Criar nova reserva para ${this.formatarDataBrasil(data)}?`);
+      alert(`Criar nova reserva para ${this.formatarDataBrasil(data)}?`);
     },
-    
+
     handleEventClick(info) {
       console.log('Evento clicado:', info.event);
-      
+
       this.reservaSelecionada = info.event.extendedProps.reserva;
       this.modalAberto = true;
     },
-    
+
     fecharModal() {
       this.modalAberto = false;
       this.reservaSelecionada = null;
     },
-    
+
     editarReserva() {
       if (this.reservaSelecionada) {
         // Redirecionar para página de edição
-        this.$router.push({ 
-          name: 'Reservar', 
-          query: { 
-            edit: this.reservaSelecionada.id 
+        this.$router.push({
+          name: 'Reservar',
+          query: {
+            edit: this.reservaSelecionada.id
           }
         });
       }
     },
-    
+
     excluirReserva() {
       this.modalExclusao = true;
     },
-    
+
     confirmarExclusao() {
       if (this.reservaSelecionada) {
         try {
@@ -280,38 +293,38 @@ export default {
           const reservas = JSON.parse(localStorage.getItem('reservas_salas') || '[]');
           const novasReservas = reservas.filter(r => r.id !== this.reservaSelecionada.id);
           localStorage.setItem('reservas_salas', JSON.stringify(novasReservas));
-          
+
           // Emitir evento para outras partes da aplicação
           window.dispatchEvent(new CustomEvent('reserva-removida'));
-          
+
           // Atualizar calendário
           this.atualizarEventos();
-          
+
           // Fechar modais
           this.modalExclusao = false;
           this.modalAberto = false;
           this.reservaSelecionada = null;
-          
+
           alert('Reserva excluída com sucesso!');
-          
+
         } catch (error) {
           console.error('Erro ao excluir reserva:', error);
           alert('Erro ao excluir reserva: ' + error.message);
         }
       }
     },
-    
+
     cancelarExclusao() {
       this.modalExclusao = false;
     },
-    
+
     irParaHoje() {
       if (this.$refs.fullCalendar) {
         const calendarApi = this.$refs.fullCalendar.getApi();
         calendarApi.today();
       }
     },
-    
+
     formatarDataBrasil(data) {
       return new Date(data + 'T00:00:00').toLocaleDateString('pt-BR');
     }
@@ -344,7 +357,8 @@ export default {
   gap: 10px;
 }
 
-.btn-hoje, .btn-atualizar {
+.btn-hoje,
+.btn-atualizar {
   background: #25065f;
   color: white;
   border: none;
@@ -355,7 +369,8 @@ export default {
   transition: background 0.2s;
 }
 
-.btn-hoje:hover, .btn-atualizar:hover {
+.btn-hoje:hover,
+.btn-atualizar:hover {
   background: #14165f;
 }
 
@@ -518,7 +533,8 @@ export default {
   background: #1976d2;
 }
 
-.btn-excluir:hover, .btn-confirmar:hover {
+.btn-excluir:hover,
+.btn-confirmar:hover {
   background: #d32f2f;
 }
 
