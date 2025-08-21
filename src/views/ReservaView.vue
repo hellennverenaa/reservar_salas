@@ -67,11 +67,14 @@
       <div v-if="mensagem" :class="['mensagem', tipoMensagem]">
         {{ mensagem }}
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
+
+import { Camera } from 'lucide-vue-next';
 export default {
   name: 'ReservaView',
   data() {

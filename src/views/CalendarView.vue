@@ -153,6 +153,7 @@ export default {
           const inicio = new Date(`${reserva.data}T${reserva.horaInicio}`);
           const fim = new Date(`${reserva.data}T${reserva.horaFinal}`);
 
+          
           return {
             id: reserva.id,
             title: `${reserva.sala}`,

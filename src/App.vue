@@ -1,6 +1,8 @@
 
 <script setup>
+import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import { Camera } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -12,20 +14,34 @@ import { RouterLink, RouterView } from 'vue-router'
         
       </nav>
     </div>
+    <div class="size-full">
+    <HomePage 
+      v-if="currentView === 'home'" 
+      @bookingStart="() => setCurrentView('booking')" 
+    />
+    <BookingForm 
+      v-if="currentView === 'booking'"
+      :bookings="bookings"
+      @back="() => setCurrentView('home')"
+      @addBooking="addBooking"
+    />
+    <Toaster />
+  </div>
   </header>
 
   <RouterView />
 </template>
 
 <style scoped>
+
 header {
   width: 100%;
-  background: linear-gradient(90deg, #6d3acb 0%, #2a135b 100%);
-  box-shadow: 0 2px 12px #0001;
+  background: linear-gradient(90deg, #161516 0%, #d9d7dc 100%);
+  box-shadow: 0 20px 120px #0001;
   padding: 0;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
 .wrapper {
@@ -48,7 +64,7 @@ nav {
 }
 
 nav a {
-  color: #2a135b;
+  color: #d7d4dc;
   background: rgba(255,255,255,0.08);
   padding: 0.6rem 1.3rem;
   border-radius: 24px;
@@ -60,13 +76,13 @@ nav a {
 }
 nav a.router-link-exact-active,
 nav a.router-link-active {
-  background: #2a135b;
+  background: #171617;
   color: #fafafa;
   font-weight: 700;
   box-shadow: 0 2px 8px #0001;
 }
 nav a:hover {
-  background: #2a135b;
+  background: #080809;
   color: #fff;
 }
 
