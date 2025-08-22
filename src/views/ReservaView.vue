@@ -1,23 +1,74 @@
 <template>
-  <div class="reserva-view">
-    <div class="reserva-card">
-      <h2>Reserve sua Sala</h2>
+  <div class="min-h-screen bg-gradient-to-br from-violet-100 via-pink-50 to-cyan-100 p-4">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="flex items-center mb-8">
+        <button 
+          @click="$emit('back')"
+          class="mr-4 px-4 py-2 rounded-xl bg-white/80 hover:bg-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border border-white/30"
+        >
+          <ArrowLeft class="w-4 h-4 mr-2 inline" />
+          Voltar
+        </button>
+        <div>
+          <h1 class="text-foreground">Nova Reserva</h1>
+          <p class="text-muted-foreground">Preencha os dados para reservar uma sala</p>
+        </div>
+      </div>
 
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="responsavel">Responsável</label>
-          <input v-model="form.responsavel" id="responsavel" required placeholder="Nome do responsável" />
+       <div class="grid grid-cols-1 xl:grid-cols-2 gap-8"></div>
+
+       <!-- Formulário -->
+
+         <div class="space-y-6">
+          <div class="bg-gradient-to-br from-white/95 via-white/90 to-white/95 backdrop-blur-lg p-8 rounded-3xl shadow-2xl border border-white/30 hover:shadow-3xl transition-all duration-500">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-violet-500 to-pink-500 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                <Users class="w-6 h-6 text-white" />
+              </div>
+              <h2 class="text-xl font-semibold text-foreground">Dados da Reserva</h2>
+            </div>
+          </div>
+         </div>
+
+      <form @submit.prevent="handleSubmit" class="space-y-6">
+   <!-- Responsável -->
+   <div class="space-y-2">
+   <div class="form-group">
+      <label class="block text-sm font-medium text-foreground">Responsável</label>
+        <div class="flex gap-3">
+        <input 
+        v-model="form.responsavel" id="responsavel" 
+        required placeholder="Nome do responsável"
+        class="flex-1 px-4 py-3 bg-gradient-to-r from-white/70 to-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"/>
+        <button 
+          type="button" 
+          @click="handleBadgeRead"
+          class="px-4 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+        <CreditCard class="w-4 h-4 mr-2 inline" />
+          Bipar
+        </button>
         </div>
+        </div>
+
+       <!-- Tipo de Evento -->
+
         <div class="form-group">
-          <label for="Qual">Qual será o tipo de evento/atividade? (Reunião, treinamento, apresentação, entrevista,
+          <div class="space-y-2"></div>
+          <label class="block text-sm font-medium text-foreground">Qual será o tipo de evento/atividade? (Reunião, treinamento, apresentação, entrevista,
             etc.)</label>
-          <input v-model="form.tipoevento" id="tipoevento" required placeholder="Título" />
-        </div>
+            <textarea
+            v-model="form.tipoevento" 
+          id="tipoevento" required placeholder="Título" 
+          rows="3"
+          class="flex-1 px-3 bg-gradient-to-r from-white/70 to-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm resize-none"
+          ></textarea>
+          </div>
         <div class="form-group">
           <label for="data">Data</label>
           <input v-model="form.data" id="data" type="date" required />
         </div>
-
+       </div>
         <div class="form-group">
           <label for="horaInicio">Hora de Início</label>
           <input v-model="form.horaInicio" id="horaInicio" type="time" required />
