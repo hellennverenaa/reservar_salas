@@ -50,7 +50,7 @@
         </button>
         </div>
         </div>
-
+        </div>
        <!-- Tipo de Evento -->
 
         <div class="form-group">
@@ -64,11 +64,13 @@
           class="flex-1 px-3 bg-gradient-to-r from-white/70 to-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm resize-none"
           ></textarea>
           </div>
+
+          
         <div class="form-group">
           <label for="data">Data</label>
           <input v-model="form.data" id="data" type="date" required />
         </div>
-       </div>
+       
         <div class="form-group">
           <label for="horaInicio">Hora de Início</label>
           <input v-model="form.horaInicio" id="horaInicio" type="time" required />
@@ -94,13 +96,7 @@
           <input v-model.number="form.quantidade" id="quantidade" type="number" min="1" required />
         </div>
 
-        <div class="form-group">
-          <label for="sala">Sala</label>
-          <select v-model="form.sala" id="sala" required>
-            <option disabled value="">Selecione uma sala</option>
-            <option v-for="sala in salas" :key="sala" :value="sala">{{ sala }}</option>
-          </select>
-        </div>
+       
 
         <div class="form-group">
           <label for="cafe">Deseja Café?</label>
@@ -317,11 +313,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(120deg, #6d3acb 0%, #2a135b 100%);
+  background: linear-gradient(120deg, #d22d36 0%, #2a135b 100%);
 }
 
 .reserva-card {
-  background: #fff;
+  background: rgb(27, 27, 27)313;
   padding: 40px 32px 32px 32px;
   border-radius: 16px;
   box-shadow: 0 4px 24px #0002;
@@ -370,7 +366,7 @@ export default {
   width: 100%;
   padding: 12px;
   background: #25065f;
-  color: #fff;
+  color: rgb(31, 30, 30)a0a;
   border: none;
   border-radius: 6px;
   font-size: 1.1rem;
@@ -399,13 +395,13 @@ export default {
 
 .mensagem.erro {
   color: #d32f2f;
-  background-color: #ffebee;
+  background-color: #181616;
   border-left: 4px solid #d32f2f;
 }
 
 .mensagem.sucesso {
   color: #2e7d32;
-  background-color: #e8f5e8;
+  background-color: rgb(14, 15, 14);
   border-left: 4px solid #2e7d32;
 }
 </style>
