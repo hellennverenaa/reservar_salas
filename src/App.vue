@@ -6,6 +6,8 @@ import { Camera } from 'lucide-vue-next';
 </script>
 
 <template>
+  <div class="calendar-container bg-white">
+  </div>
   <header>
     <div class="wrapper">
       <nav>
