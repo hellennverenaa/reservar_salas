@@ -18,11 +18,15 @@
             <span>Voltar ao Início</span>
           </button>
 
+
+
           <!-- Status Badge -->
           <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold border-2 border-yellow-200">
             ✨ Nova Reserva
           </div>
         </div>
+
+
 
         <!-- Título Principal -->
         <div class="text-center mt-8 mb-6">
@@ -40,6 +44,8 @@
 
       <!-- Formulário Principal -->
       <form @submit.prevent="handleSubmit" class="bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
+        
+        
         <!-- Header do Formulário -->
         <div class="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white px-8 py-6 relative overflow-hidden">
           <div class="absolute inset-0 bg-black/10"></div>
@@ -52,12 +58,18 @@
             </h2>
             <p class="text-red-100 mt-2">Todos os campos marcados com * são obrigatórios</p>
           </div>
+
+
+
           <!-- Elementos decorativos -->
           <div class="absolute top-2 right-4 w-16 h-16 bg-white/5 rounded-full"></div>
           <div class="absolute bottom-2 right-12 w-8 h-8 bg-white/10 rounded-full"></div>
         </div>
 
         <div class="p-8 space-y-10">
+
+
+
           <!-- Seção 1: Informações Pessoais -->
           <div class="space-y-6">
             <div class="flex items-center mb-6">
@@ -68,6 +80,9 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+
+
               <!-- Nome do Responsável -->
               <div class="space-y-2">
                 <label class="block text-sm font-bold text-gray-800 mb-2">
@@ -79,11 +94,12 @@
                     type="text"
                     required
                     placeholder="Digite seu nome completo"
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
-                  />
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-600 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12">
                   <UserIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
               </div>
+
+
 
               <!-- Título da Reserva -->
               <div class="space-y-2">
@@ -96,7 +112,7 @@
                     type="text"
                     required
                     placeholder="Ex: Reunião da Equipe de Marketing"
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
                   />
                   <FileTextIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
@@ -104,37 +120,90 @@
             </div>
           </div>
 
+
           <!-- Seção 2: Local e Data -->
           <div class="space-y-6">
             <div class="flex items-center mb-6">
               <div class="bg-black/10 p-3 rounded-full mr-4">
                 <MapPinIcon class="w-5 h-5 text-black" />
               </div>
-              <h3 class="text-xl font-bold text-gray-900">🏛️ Local e Data</h3>
+              <h3 class="text-xl border-solid text-gray-900">🏛️ Local e Data</h3>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+
+
               <!-- Sala -->
               <div class="space-y-2">
-                <label class="block text-sm font-bold text-gray-800 mb-2">
-                  Selecionar Sala *
-                </label>
-                <div class="relative">
-                  <select 
-                    v-model="formData.room"
-                    required
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
-                  >
-                    <option value="">Selecione uma sala disponível</option>
-                    <option v-for="room in rooms" :key="room" :value="room" class="py-2">
-                      {{ room }}
-                    </option>
-                  </select>
-                  <BuildingIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <ChevronDownIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                </div>
-              </div>
+    <label class="block text-sm font-bold text-gray-800 mb-2">
+      Selecionar Sala *
+    </label>
+    <div class="relative">
+      <Menu as="div" class="relative w-full">
+        <MenuButton 
+          class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 bg-white text-left inline-flex items-center justify-between"
+          :class="{ 'text-gray-400': !formData.room }"
+        >
+          <span>{{ formData.room || 'Selecione uma sala disponível' }}</span>
+          <ChevronDownIcon class="w-5 h-5 text-gray-400" />
+        </MenuButton>
+        
+        <BuildingIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+        
+        <transition 
+          enter-active-class="transition ease-out duration-100" 
+          enter-from-class="transform opacity-0 scale-95" 
+          enter-to-class="transform opacity-100 scale-100" 
+          leave-active-class="transition ease-in duration-75" 
+          leave-from-class="transform opacity-100 scale-100" 
+          leave-to-class="transform opacity-0 scale-95"
+        >
+          <MenuItems class="absolute z-10 mt-1 w-full origin-top rounded-2xl bg-white border-2 border-gray-200 shadow-lg max-h-60 overflow-auto">
+            <div class="py-1">
+              <!-- Opção para limpar seleção -->
+              <Menu v-slot="{ active }">
+                <button
+                  @click="formData.room = ''"
+                  :class="[
+                    active ? 'bg-red-50 text-red-600' : 'text-gray-500',
+                    'block w-full px-6 py-3 text-left text-sm font-medium transition-colors duration-150'
+                  ]"
+                >
+                  Limpar seleção
+                </button>
+              </Menu>
+              
+              <!-- Divisor -->
+              <div class="border-t border-gray-100 my-1"></div>
+              
+              <!-- Opções das salas -->
+              <Menu v-for="room in rooms" :key="room" v-slot="{ active }">
+                <button
+                  @click="formData.room = room"
+                  :class="[
+                    active ? 'bg-red-50 text-red-600' : 'text-gray-800',
+                    formData.room === room ? 'bg-red-100 text-red-700 font-semibold' : '',
+                    'block w-full px-6 py-3 text-left text-sm font-medium transition-colors duration-150 relative'
+                  ]"
+                >
+                  {{ room }}
+                  <!-- Ícone de check para item selecionado -->
+                  <CheckIcon 
+                    v-if="formData.room === room"
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-red-600"
+                  />
+                </button>
+              </Menu>
+            </div>
+          </MenuItems>
+        </transition>
+      </Menu>
+    </div>
+  </div>
 
+
+              
               <!-- Data -->
               <div class="space-y-2">
                 <label class="block text-sm font-bold text-gray-800 mb-2">
@@ -146,7 +215,7 @@
                     type="date"
                     required
                     :min="minDate"
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
                   />
                   <CalendarIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
@@ -174,7 +243,7 @@
                     v-model="formData.start"
                     type="time"
                     required
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
                   />
                   <ClockIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
@@ -190,7 +259,7 @@
                     v-model="formData.end"
                     type="time"
                     required
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
                   />
                   <ClockIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
@@ -216,7 +285,7 @@
                 <div class="relative">
                   <select 
                     v-model="formData.eventType"
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
                   >
                     <option value="">Selecione o tipo de evento</option>
                     <option v-for="type in eventTypes" :key="type" :value="type" class="py-2">
@@ -236,7 +305,7 @@
                 <div class="relative">
                   <select 
                     v-model="formData.participants"
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
                   >
                     <option value="">Selecione o tipo de participantes</option>
                     <option v-for="participant in participantTypes" :key="participant" :value="participant" class="py-2">
@@ -260,7 +329,7 @@
                     min="1"
                     max="100"
                     placeholder="Ex: 10 pessoas"
-                    class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
+                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12"
                   />
                   <HashIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
@@ -278,7 +347,7 @@
                       type="radio"
                       :value="true"
                       name="coffee"
-                      class="w-5 h-5 text-red-600 border-gray-300 focus:ring-red-600"
+                      class="w-5 h-5 text-red-600 border-gray-500 focus:ring-red-600"
                     />
                     <span class="text-gray-700 font-medium group-hover:text-red-600 transition-colors duration-200">☕ Sim, por favor</span>
                   </label>
@@ -311,7 +380,7 @@
                 v-model="formData.notes"
                 rows="4"
                 placeholder="Digite aqui observações, instruções especiais ou requisitos adicionais para a reserva..."
-                class="w-full px-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-red-500 focus:outline-none resize-none transition-all duration-300 text-gray-800 font-medium pl-12"
+                class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none resize-none transition-all duration-300 text-gray-800 font-medium pl-12"
               ></textarea>
               <MessageSquareIcon class="absolute left-4 top-6 w-5 h-5 text-gray-400" />
             </div>
@@ -363,6 +432,8 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+
 import { 
   Plus as PlusIcon, 
   ArrowLeft as ArrowLeftIcon, 
