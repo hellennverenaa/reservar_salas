@@ -277,25 +277,70 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+
               <!-- Tipo de Evento -->
-              <div class="space-y-2">
-                <label class="block text-sm font-bold text-gray-800 mb-2">
-                  Tipo de Evento/Atividade
-                </label>
-                <div class="relative">
-                  <select 
-                    v-model="formData.eventType"
-                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
+            <div class="space-y-2">
+    <label class="block text-sm font-bold text-gray-800 mb-2">
+      Tipo de Evento/Atividade
+    </label>
+    <div class="relative">
+      <Listbox v-model="formData.eventType">
+        <div class="relative mt-1">
+          <ListboxButton
+            class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-4 pl-12 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300"
+          >
+            <span class="flex items-center">
+              <TagIcon class="absolute left-4 w-5 h-5 text-gray-400" />
+              <span class="ml-4 block truncate">{{ selectedText }}</span>
+            </span>
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </span>
+          </ListboxButton>
+
+          <transition
+            leave-active-class="transition duration-100 ease-in"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          >
+            <ListboxOptions
+              class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            >
+              <ListboxOption
+                v-for="type in eventTypes"
+                :key="type"
+                :value="type"
+                v-slot="{ active, selected }"
+              >
+                <li
+                  :class="[
+                    active ? 'bg-red-100 text-red-900' : 'text-gray-900',
+                    'relative cursor-default select-none py-2 pl-10 pr-4',
+                  ]"
+                >
+                  <span
+                    :class="[
+                      selected ? 'font-medium' : 'font-normal',
+                      'block truncate',
+                    ]"
                   >
-                    <option value="">Selecione o tipo de evento</option>
-                    <option v-for="type in eventTypes" :key="type" :value="type" class="py-2">
-                      {{ type }}
-                    </option>
-                  </select>
-                  <TagIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <ChevronDownIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                </div>
-              </div>
+                    {{ type }}
+                  </span>
+                  <span
+                    v-if="selected"
+                    class="absolute inset-y-0 left-0 flex items-center pl-3 text-red-600"
+                  >
+                    <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                  </span>
+                </li>
+              </ListboxOption>
+            </ListboxOptions>
+          </transition>
+        </div>
+      </Listbox>
+    </div>
+  </div>
 
               <!-- Tipo de Participantes -->
               <div class="space-y-2">
@@ -433,6 +478,12 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from '@headlessui/vue';
 
 import { 
   Plus as PlusIcon, 
@@ -504,6 +555,7 @@ const eventTypes = [
   'Demo de Produto',
   'Call com Fornecedor/Corporativo',
   'Reunião de Gerentes',
+  'Leitura de Livro',
   'Outros'
 ]
 
@@ -522,6 +574,13 @@ const participantTypes = [
         'Visitas',
         'Workshops'
 ]
+
+const selectedText = computed(() => {
+  if (formData.value.eventType) {
+    return formData.value.eventType;
+  }
+  return 'Selecione o tipo de evento';
+});
 
 // Estado de conflito
 const conflictMessage = ref('')
