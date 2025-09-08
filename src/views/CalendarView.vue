@@ -34,8 +34,12 @@
         class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
         @click.stop
       >
-        <div class="flex justify-between items-center p-6 border-b border-gray-200">
-          <h3 class="text-xl font-semibold text-gray-900">Detalhes da Reserva</h3>
+
+
+      <!--Detalhes da reserva -->
+
+        <div class="flex justify-between items-center p-7 border-b border-gray-500">
+          <h3 class="text-xl font-bold text-gray-500">Detalhes da Reserva</h3>
           <button 
             @click="fecharModal" 
             class="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200"

@@ -135,70 +135,65 @@
 
 
               <!-- Sala -->
-              <div class="space-y-2">
+             <div class="space-y-2">
     <label class="block text-sm font-bold text-gray-800 mb-2">
-      Selecionar Sala *
+     Selecione a Sala
     </label>
     <div class="relative">
-      <Menu as="div" class="relative w-full">
-        <MenuButton 
-          class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 bg-white text-left inline-flex items-center justify-between"
-          :class="{ 'text-gray-400': !formData.room }"
-        >
-          <span>{{ formData.room || 'Selecione uma sala disponível' }}</span>
-          <ChevronDownIcon class="w-5 h-5 text-gray-400" />
-        </MenuButton>
-        
-        <BuildingIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
-        
-        <transition 
-          enter-active-class="transition ease-out duration-100" 
-          enter-from-class="transform opacity-0 scale-95" 
-          enter-to-class="transform opacity-100 scale-100" 
-          leave-active-class="transition ease-in duration-75" 
-          leave-from-class="transform opacity-100 scale-100" 
-          leave-to-class="transform opacity-0 scale-95"
-        >
-          <MenuItems class="absolute z-10 mt-1 w-full origin-top rounded-2xl bg-white border-2 border-gray-200 shadow-lg max-h-60 overflow-auto">
-            <div class="py-1">
-              <!-- Opção para limpar seleção -->
-              <Menu v-slot="{ active }">
-                <button
-                  @click="formData.room = ''"
+      <Listbox v-model="formData.rooms">
+        <div class="relative mt-1">
+          <ListboxButton
+            class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-4 pl-12 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300"
+          >
+            <span class="flex items-center">
+              <TagIcon class="absolute left-4 w-5 h-5 text-gray-400" />
+              <span class="ml-4 block truncate">{{ selectedText }}</span>
+            </span>
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </span>
+          </ListboxButton>
+
+          <transition
+            leave-active-class="transition duration-100 ease-in"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          >
+            <ListboxOptions
+              class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            >
+              <ListboxOption
+                v-for="type in rooms"
+                :key="type"
+                :value="type"
+                v-slot="{ active, selected }"
+              >
+                <li
                   :class="[
-                    active ? 'bg-red-50 text-red-600' : 'text-gray-500',
-                    'block w-full px-6 py-3 text-left text-sm font-medium transition-colors duration-150'
+                    active ? 'bg-red-100 text-red-900' : 'text-gray-900',
+                    'relative cursor-default select-none py-2 pl-10 pr-4',
                   ]"
                 >
-                  Limpar seleção
-                </button>
-              </Menu>
-              
-              <!-- Divisor -->
-              <div class="border-t border-gray-100 my-1"></div>
-              
-              <!-- Opções das salas -->
-              <Menu v-for="room in rooms" :key="room" v-slot="{ active }">
-                <button
-                  @click="formData.room = room"
-                  :class="[
-                    active ? 'bg-red-50 text-red-600' : 'text-gray-800',
-                    formData.room === room ? 'bg-red-100 text-red-700 font-semibold' : '',
-                    'block w-full px-6 py-3 text-left text-sm font-medium transition-colors duration-150 relative'
-                  ]"
-                >
-                  {{ room }}
-                  <!-- Ícone de check para item selecionado -->
-                  <CheckIcon 
-                    v-if="formData.room === room"
-                    class="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-red-600"
-                  />
-                </button>
-              </Menu>
-            </div>
-          </MenuItems>
-        </transition>
-      </Menu>
+                  <span
+                    :class="[
+                      selected ? 'font-medium' : 'font-normal',
+                      'block truncate',
+                    ]"
+                  >
+                    {{ type }}
+                  </span>
+                  <span
+                    v-if="selected"
+                    class="absolute inset-y-0 left-0 flex items-center pl-3 text-red-600"
+                  >
+                    <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                  </span>
+                </li>
+              </ListboxOption>
+            </ListboxOptions>
+          </transition>
+        </div>
+      </Listbox>
     </div>
   </div>
 
@@ -343,24 +338,67 @@
   </div>
 
               <!-- Tipo de Participantes -->
-              <div class="space-y-2">
-                <label class="block text-sm font-bold text-gray-800 mb-2">
-                  Tipo de Participantes
-                </label>
-                <div class="relative">
-                  <select 
-                    v-model="formData.participants"
-                    class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12 appearance-none bg-white"
+<div class="space-y-2">
+    <label class="block text-sm font-bold text-gray-800 mb-2">
+      Tipo de Participantes
+    </label>
+    <div class="relative">
+      <Listbox v-model="formData.participantTypes">
+        <div class="relative mt-1">
+          <ListboxButton
+            class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-4 pl-12 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300"
+          >
+            <span class="flex items-center">
+              <TagIcon class="absolute left-4 w-5 h-5 text-gray-400" />
+              <span class="ml-4 block truncate">{{ selectedText }}</span>
+            </span>
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </span>
+          </ListboxButton>
+
+          <transition
+            leave-active-class="transition duration-100 ease-in"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          >
+            <ListboxOptions
+              class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            >
+              <ListboxOption
+                v-for="type in participantTypes"
+                :key="type"
+                :value="type"
+                v-slot="{ active, selected }"
+              >
+                <li
+                  :class="[
+                    active ? 'bg-red-100 text-red-900' : 'text-gray-900',
+                    'relative cursor-default select-none py-2 pl-10 pr-4',
+                  ]"
+                >
+                  <span
+                    :class="[
+                      selected ? 'font-medium' : 'font-normal',
+                      'block truncate',
+                    ]"
                   >
-                    <option value="">Selecione o tipo de participantes</option>
-                    <option v-for="participant in participantTypes" :key="participant" :value="participant" class="py-2">
-                      {{ participant }}
-                    </option>
-                  </select>
-                  <UsersIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <ChevronDownIcon class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                </div>
-              </div>
+                    {{ type }}
+                  </span>
+                  <span
+                    v-if="selected"
+                    class="absolute inset-y-0 left-0 flex items-center pl-3 text-red-600"
+                  >
+                    <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                  </span>
+                </li>
+              </ListboxOption>
+            </ListboxOptions>
+          </transition>
+        </div>
+      </Listbox>
+    </div>
+  </div>
 
               <!-- Número de Participantes -->
               <div class="space-y-2">
@@ -500,7 +538,8 @@ import {
   Tag as TagIcon,
   Hash as HashIcon,
   MessageSquare as MessageSquareIcon,
-  Check as CheckIcon
+  Check as CheckIcon,
+  DataSelector as DataSelector, 
 } from 'lucide-vue-next'
 
 const emit = defineEmits(['voltar-home', 'reserva-criada'])
