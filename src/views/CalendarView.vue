@@ -27,7 +27,7 @@
 
     <div 
       v-if="modalAberto" 
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      class="modal-backdrop-blur"
       @click="fecharModal"
     >
       <div 
@@ -504,6 +504,39 @@ export default {
   
   :deep(.fc-button-group) {
     @apply flex-wrap gap-1;
+  }
+}
+
+
+
+.modal-backdrop-blur {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+  
+  /* Fundo transparente */
+  background-color: rgba(0, 0, 0, 0.7);
+  
+  /* Efeito embaçado */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  /* Animação suave */
+  animation: fadeInBlur 0.3s ease-out;
+}
+
+@keyframes fadeInBlur {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
   }
 }
 </style>
