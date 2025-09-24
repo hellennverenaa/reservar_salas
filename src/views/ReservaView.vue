@@ -361,25 +361,94 @@
                 </div>
 
                 <!-- Café -->
-                <div class="space-y-2">
-                  <label class="block text-sm font-bold text-gray-800 mb-2">
-                    Precisa de Café?
-                  </label>
-                  <div class="flex items-center space-x-8 pt-2">
-                    <label class="flex items-center space-x-3 cursor-pointer group">
-                      <input v-model="formData.needsCoffee" type="radio" :value="true" name="coffee"
-                        class="w-5 h-5 text-red-600 border-gray-500 focus:ring-red-600" />
-                      <span class="text-gray-700 font-medium group-hover:text-red-600 transition-colors duration-200">☕
-                        Sim, por favor</span>
-                    </label>
-                    <label class="flex items-center space-x-3 cursor-pointer group">
-                      <input v-model="formData.needsCoffee" type="radio" :value="false" name="coffee"
-                        class="w-5 h-5 text-red-600 border-gray-300 focus:ring-red-600" />
-                      <span class="text-gray-700 font-medium group-hover:text-gray-900 transition-colors duration-200">❌
-                        Não precisa</span>
-                    </label>
-                  </div>
-                </div>
+                 <Card>
+    <CardHeader>
+      <CardTitle class="flex items-center gap-2">
+        <CoffeeIcon class="w-5 h-5 text-red-600" />
+        Serviço de Coffee Break
+      </CardTitle>
+    </CardHeader>
+
+    <CardContent>
+      <div class="flex items-center space-x-2 mb-4">
+        <input
+          id="coffee-break"
+          type="checkbox"
+          class="peer"
+          v-model="coffeeBreakRequested"
+          @change="toggleCoffeeBreak"
+        />
+        <label
+          for="coffee-break"
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          Solicitar Coffee Break
+        </label>
+
+        <Badge v-if="coffeeBreakRequested" variant="secondary" class="ml-2">
+          <CoffeeIcon class="w-3 h-3 mr-1" />
+          Solicitado
+        </Badge>
+      </div>
+
+      <Collapsible v-if="coffeeBreakRequested" :open="coffeeBreakExpanded" @update:open="coffeeBreakExpanded = $event">
+        <template #trigger>
+          <Button
+            variant="ghost"
+            class="p-0 h-auto font-normal text-sm text-gray-600 hover:text-gray-900 flex items-center"
+          >
+            <ChevronDownIcon class="w-4 h-4 mr-1" />
+            Configurar detalhes do coffee break
+          </Button>
+        </template>
+
+        <div class="space-y-4 mt-4 p-4 bg-gray-50 rounded-lg">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label for="coffeeParticipants">Quantidade de Pessoas *</Label>
+              <Input
+                id="coffeeParticipants"
+                type="number"
+                placeholder="Ex: 8"
+                v-model="formData.coffeeParticipants"
+                :required="coffeeBreakRequested"
+              />
+            </div>
+
+            <div>
+              <Label for="serviceType">Tipo de Serviço *</Label>
+              <Select v-model="formData.serviceType">
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione o tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="cafe-simples">Café Simples</SelectItem>
+                  <SelectItem value="lanche">Lanche</SelectItem>
+                  <SelectItem value="completo">Completo</SelectItem>
+                  <SelectItem value="personalizado">Personalizado</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div>
+            <Label for="observations">Observações</Label>
+            <Textarea
+              id="observations"
+              placeholder="Ex: sem açúcar, incluir chá, água gelada, restrições alimentares..."
+              v-model="formData.observations"
+            />
+          </div>
+        </div>
+      </Collapsible>
+    </CardContent>
+  </Card>
+
+
+
+
+
+
               </div>
             </div>
 
@@ -441,13 +510,14 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, reactive } from 'vue'
 // import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import {
   Listbox,
   ListboxButton,
   ListboxOptions,
   ListboxOption,
+  
 } from '@headlessui/vue';
 
 const isAuthenticated = ref(false)
@@ -477,13 +547,17 @@ import {
 
 } from 'lucide-vue-next'
 
+
+const coffeeBreakRequested = ref(false);
+const coffeeBreakExpanded = ref(false);
+
 const emit = defineEmits(['voltar-home', 'reserva-criada'])
 
 // Dados do formulário
 const formData = ref({
   responsibleName: '',
   title: '',
-  room: '',
+  rooms: '',
   date: '',
   start: '',
   end: '',
@@ -548,6 +622,11 @@ const participantTypes = [
   'Visitas',
   'Workshops'
 ]
+
+// Função para atualizar o colapsável
+const toggleCoffeeBreak = () => {
+  coffeeBreakExpanded.value = coffeeBreakRequested.value;
+};
 
 const selectedEventType = computed(() => {
   if (formData.value.eventType) {
@@ -652,6 +731,20 @@ const handleSubmit = () => {
   window.dispatchEvent(new CustomEvent('reserva-adicionada'))
   emit('reserva-criada', reservaData)
 }
+
+function submitForm() {
+  router.push({ 
+    name: 'CoffeeBreakAdmin',
+    query: { 
+      nome: formData.value.nome,
+      sala: formData.value.sala,
+      data: formData.value.data,
+      participantes: formData.value.participantes
+    }
+  });
+}
+
+
 </script>
 
 <style scoped>

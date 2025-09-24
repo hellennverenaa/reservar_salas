@@ -263,7 +263,7 @@ export default {
       const coresFixas = {
         'Sala Paixão': '#CC0000', // Vermelho
         'Respeito': '#333333', // Preto
-        'Auditório F1': '#990000', // Vermelho escuro
+        'Auditório F1': '#180000', // Vermelho escuro
         'Auditório F2': '#000000', // Preto puro
         'Auditório F3': '#FF3333', // Vermelho mais claro
         'Hoshin': '#660000', // Vermelho muito escuro
