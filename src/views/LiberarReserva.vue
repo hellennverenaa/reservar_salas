@@ -4,7 +4,7 @@
     <!-- Header -->
     <div class="text-center mb-10">
       <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-        <CoffeeIcon class="w-8 h-8 text-white" />
+        <Coffee class="w-8 h-8 text-white" />
       </div>
       <h2 class="text-3xl font-semibold mb-2">Painel de Controle</h2>
       <p class="text-gray-600">Gestão e coordenação do serviço de Coffee Break</p>
@@ -64,7 +64,7 @@
           </h3>
 
           <div v-if="todayOrders.length === 0" class="bg-white shadow-md rounded-xl p-10 text-center">
-            <CoffeeIcon class="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <Coffee class="w-12 h-12 text-gray-300 mx-auto mb-4" />
             <p class="text-gray-600">Nenhum pedido encontrado para esta data</p>
           </div>
 
@@ -74,7 +74,7 @@
               <div class="flex justify-between items-start mb-3">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                    <CoffeeIcon class="w-5 h-5 text-red-600" />
+                    <Coffee class="w-5 h-5 text-red-600" />
                   </div>
                   <div>
                     <div class="font-semibold">{{ order.room }}</div>
@@ -160,7 +160,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import {
-  Coffee as CoffeeIcon,
+  Coffee,
   Calendar as CalendarIcon,
   Clock as ClockIcon,
   User as UserIcon,

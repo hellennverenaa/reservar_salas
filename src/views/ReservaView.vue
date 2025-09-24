@@ -361,94 +361,45 @@
                 </div>
 
                 <!-- Café -->
-                 <Card>
-    <CardHeader>
-      <CardTitle class="flex items-center gap-2">
-        <CoffeeIcon class="w-5 h-5 text-red-600" />
-        Serviço de Coffee Break
-      </CardTitle>
-    </CardHeader>
+                <v-card>
+                  <v-card-title class="flex items-center gap-2">
+                    <CoffeeIcon class="w-5 h-5 text-red-600" />
+                    Serviço de Coffee Break
+                  </v-card-title>
 
-    <CardContent>
-      <div class="flex items-center space-x-2 mb-4">
-        <input
-          id="coffee-break"
-          type="checkbox"
-          class="peer"
-          v-model="coffeeBreakRequested"
-          @change="toggleCoffeeBreak"
-        />
-        <label
-          for="coffee-break"
-          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-          Solicitar Coffee Break
-        </label>
+                  <v-card-text>
+                    <div class="flex items-center space-x-2 mb-4">
+                      <v-checkbox v-model="coffeeBreakRequested" label="Solicitar Coffee Break"
+                        @change="toggleCoffeeBreak" hide-details color="red"></v-checkbox>
+                      <v-chip v-if="coffeeBreakRequested" color="secondary" class="ml-2" size="small">
+                        <CoffeeIcon class="w-3 h-3 mr-1" />
+                        Solicitado
+                      </v-chip>
+                    </div>
 
-        <Badge v-if="coffeeBreakRequested" variant="secondary" class="ml-2">
-          <CoffeeIcon class="w-3 h-3 mr-1" />
-          Solicitado
-        </Badge>
-      </div>
-
-      <Collapsible v-if="coffeeBreakRequested" :open="coffeeBreakExpanded" @update:open="coffeeBreakExpanded = $event">
-        <template #trigger>
-          <Button
-            variant="ghost"
-            class="p-0 h-auto font-normal text-sm text-gray-600 hover:text-gray-900 flex items-center"
-          >
-            <ChevronDownIcon class="w-4 h-4 mr-1" />
-            Configurar detalhes do coffee break
-          </Button>
-        </template>
-
-        <div class="space-y-4 mt-4 p-4 bg-gray-50 rounded-lg">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label for="coffeeParticipants">Quantidade de Pessoas *</Label>
-              <Input
-                id="coffeeParticipants"
-                type="number"
-                placeholder="Ex: 8"
-                v-model="formData.coffeeParticipants"
-                :required="coffeeBreakRequested"
-              />
-            </div>
-
-            <div>
-              <Label for="serviceType">Tipo de Serviço *</Label>
-              <Select v-model="formData.serviceType">
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione o tipo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cafe-simples">Café Simples</SelectItem>
-                  <SelectItem value="lanche">Lanche</SelectItem>
-                  <SelectItem value="completo">Completo</SelectItem>
-                  <SelectItem value="personalizado">Personalizado</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div>
-            <Label for="observations">Observações</Label>
-            <Textarea
-              id="observations"
-              placeholder="Ex: sem açúcar, incluir chá, água gelada, restrições alimentares..."
-              v-model="formData.observations"
-            />
-          </div>
-        </div>
-      </Collapsible>
-    </CardContent>
-  </Card>
-
-
-
-
-
-
+                    <v-expand-transition>
+                      <div v-if="coffeeBreakRequested && coffeeBreakExpanded"
+                        class="space-y-4 mt-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <v-text-field v-model="formData.coffeeParticipants" label="Quantidade de Pessoas *"
+                              type="number" :required="coffeeBreakRequested" placeholder="Ex: 8"
+                              hide-details></v-text-field>
+                          </div>
+                          <div>
+                            <v-combobox v-model="formData.serviceType" :items="servicosCafe" item-title="text" item-value="value" label="Tipo de Serviço *"
+                              :required="coffeeBreakRequested" placeholder="Selecione o tipo" hide-details></v-combobox>
+                          </div>
+                        </div>
+                        <div>
+                          <v-textarea v-model="formData.observations" label="Observações"
+                            placeholder="Ex: sem açúcar, incluir chá, água gelada, restrições alimentares..."
+                            hide-details></v-textarea>
+                        </div>
+                      </div>
+                    </v-expand-transition>
+                  </v-card-text>
+                </v-card>
               </div>
             </div>
 
@@ -517,8 +468,9 @@ import {
   ListboxButton,
   ListboxOptions,
   ListboxOption,
-  
+
 } from '@headlessui/vue';
+
 
 const isAuthenticated = ref(false)
 
@@ -528,7 +480,9 @@ function fetchUser(params) {
   }, 1000);
 }
 
+
 import {
+  Coffee as CoffeeIcon,
   Plus as PlusIcon,
   ArrowLeft as ArrowLeftIcon,
   AlertTriangle as AlertTriangleIcon,
@@ -552,6 +506,13 @@ const coffeeBreakRequested = ref(false);
 const coffeeBreakExpanded = ref(false);
 
 const emit = defineEmits(['voltar-home', 'reserva-criada'])
+
+const servicosCafe = ref([
+  { text: 'Café Simples', value: 'cafe-simples' },
+  { text: 'Lanche', value: 'lanche' },
+  { text: 'Completo', value: 'completo' },
+  { text: 'Personalizado', value: 'personalizado' }
+])
 
 // Dados do formulário
 const formData = ref({
@@ -733,9 +694,9 @@ const handleSubmit = () => {
 }
 
 function submitForm() {
-  router.push({ 
+  router.push({
     name: 'CoffeeBreakAdmin',
-    query: { 
+    query: {
       nome: formData.value.nome,
       sala: formData.value.sala,
       data: formData.value.data,
