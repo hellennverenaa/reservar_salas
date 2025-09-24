@@ -3,18 +3,16 @@
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-3xl font-bold text-black">Agenda de Reservas</h2>
       <div class="flex gap-3">
-        <button 
-          @click="irParaHoje" 
-          class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-        >
+        <button @click="irParaHoje"
+          class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
           Hoje
         </button>
-        <button 
-          @click="atualizarEventos" 
-          class="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
-        >
+        <button @click="atualizarEventos"
+          class="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+            </path>
           </svg>
           Atualizar
         </button>
@@ -25,25 +23,16 @@
       <FullCalendar :options="calendarOptions" ref="fullCalendar" />
     </div>
 
-    <div 
-      v-if="modalAberto" 
-      class="modal-backdrop-blur"
-      @click="fecharModal"
-    >
-      <div 
-        class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
-        @click.stop
-      >
+    <div v-if="modalAberto" class="modal-backdrop-blur" @click="fecharModal">
+      <div class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" @click.stop>
 
 
-      <!--Detalhes da reserva -->
+        <!--Detalhes da reserva -->
 
         <div class="flex justify-between items-center p-7 border-b border-gray-500">
           <h3 class="text-xl font-bold text-gray-500">Detalhes da Reserva</h3>
-          <button 
-            @click="fecharModal" 
-            class="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200"
-          >
+          <button @click="fecharModal"
+            class="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -89,63 +78,55 @@
 
             <div v-if="reservaSelecionada.cafe" class="bg-gray-50 rounded-lg p-4 border-l-4 border-gray-900">
               <span class="text-sm font-medium text-gray-900">Café</span>
-              <p class="text-gray-900">{{ reservaSelecionada.cafe }}</p>
+              <p class="text-gray-900">{{ reservaSelecionada.coffee }}</p>
+
+              <div>
+                {{
+                  reservaSelecionada.coffee }}
+              </div>
             </div>
           </div>
         </div>
 
         <div class="flex gap-3 p-6 border-t border-gray-200 justify-end">
-          <button 
-            @click="editarReserva" 
-            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-          >
+          <button @click="editarReserva"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
             Editar
           </button>
-          <button 
-            @click="excluirReserva" 
-            class="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-          >
+          <button @click="excluirReserva"
+            class="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
             Excluir
           </button>
-          <button 
-            @click="fecharModal" 
-            class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-          >
+          <button @click="fecharModal"
+            class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
             Fechar
           </button>
         </div>
       </div>
     </div>
 
-    <div 
-      v-if="modalExclusao" 
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-      @click="cancelarExclusao"
-    >
-      <div 
-        class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6"
-        @click.stop
-      >
+    <div v-if="modalExclusao" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      @click="cancelarExclusao">
+      <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6" @click.stop>
         <div class="text-center">
           <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
             <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z">
+              </path>
             </svg>
           </div>
           <h3 class="text-lg font-semibold text-gray-900 mb-2">Confirmar Exclusão</h3>
-          <p class="text-gray-600 mb-6">Tem certeza que deseja excluir esta reserva? Esta ação não pode ser desfeita.</p>
-          
+          <p class="text-gray-600 mb-6">Tem certeza que deseja excluir esta reserva? Esta ação não pode ser desfeita.
+          </p>
+
           <div class="flex gap-3 justify-center">
-            <button 
-              @click="confirmarExclusao" 
-              class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200"
-            >
+            <button @click="confirmarExclusao"
+              class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
               Sim, Excluir
             </button>
-            <button 
-              @click="cancelarExclusao" 
-              class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-lg font-medium transition-colors duration-200"
-            >
+            <button @click="cancelarExclusao"
+              class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-lg font-medium transition-colors duration-200">
               Cancelar
             </button>
           </div>
@@ -236,7 +217,7 @@ export default {
         return reservas.map(reserva => {
           const startStr = `${reserva.data}T${reserva.horaInicio}:00`;
           const endStr = `${reserva.data}T${reserva.horaFinal}:00`;
-          
+
           return {
             id: reserva.id,
             title: `${reserva.sala}`,
@@ -244,7 +225,7 @@ export default {
             end: endStr,
             allDay: false,
             // A cor do evento será definida aqui para ser aleatória ou baseada na sala
-            backgroundColor: this.getCorAleatoriaOuPorSala(reserva.sala), 
+            backgroundColor: this.getCorAleatoriaOuPorSala(reserva.sala),
             borderColor: this.getCorAleatoriaOuPorSala(reserva.sala),
             textColor: '#ffffff',
             extendedProps: {
@@ -273,7 +254,7 @@ export default {
         'Sala NIKE': '#FF0000', // Vermelho vibrante
         'Sala do BIP': '#770000' // Vermelho terroso
       };
-      
+
       // Se a sala tiver uma cor fixa, use-a. Caso contrário, gere uma cor aleatória.
       // Modificado para usar cores da paleta vermelho/preto/branco ou tons próximos.
       if (coresFixas[sala]) {
@@ -284,9 +265,9 @@ export default {
         const isRed = Math.random() > 0.5; // 50% chance de ser vermelho, 50% de ser cinza/preto
 
         if (isRed) {
-            return `hsl(0, 100%, ${30 + Math.floor(Math.random() * 30)}%)`; // Vermelho com variação de luminosidade
+          return `hsl(0, 100%, ${30 + Math.floor(Math.random() * 30)}%)`; // Vermelho com variação de luminosidade
         } else {
-            return `hsl(0, 0%, ${10 + Math.floor(Math.random() * 40)}%)`; // Cinza/Preto com variação de luminosidade
+          return `hsl(0, 0%, ${10 + Math.floor(Math.random() * 40)}%)`; // Cinza/Preto com variação de luminosidade
         }
       }
     },
@@ -341,7 +322,7 @@ export default {
     atualizarEventos() {
       console.log('Atualizando eventos do calendário...');
       const eventos = this.getReservas();
-      
+
       this.calendarOptions = {
         ...this.calendarOptions,
         events: eventos
@@ -448,23 +429,28 @@ export default {
 
 :deep(.fc-button-primary:not(:disabled):active),
 :deep(.fc-button-primary:not(:disabled).fc-button-active) {
-  @apply bg-black border-black; /* Botões ativos/selecionados ficam pretos */
+  @apply bg-black border-black;
+  /* Botões ativos/selecionados ficam pretos */
 }
 
 :deep(.fc-toolbar-title) {
-  @apply text-black; /* Título do calendário fica preto */
+  @apply text-black;
+  /* Título do calendário fica preto */
 }
 
 :deep(.fc-col-header-cell-cushion) {
-  @apply text-black font-semibold; /* Texto dos dias da semana fica preto */
+  @apply text-black font-semibold;
+  /* Texto dos dias da semana fica preto */
 }
 
 :deep(.fc-daygrid-day-number) {
-  @apply text-gray-800; /* Números dos dias do mês */
+  @apply text-gray-800;
+  /* Números dos dias do mês */
 }
 
 :deep(.fc-day-today) {
-  @apply bg-red-50; /* Dia atual com fundo vermelho claro */
+  @apply bg-red-50;
+  /* Dia atual com fundo vermelho claro */
 }
 
 :deep(.fc-event) {
@@ -485,7 +471,8 @@ export default {
 
 
 :deep(.fc-daygrid-day:hover) {
-  @apply bg-gray-100 cursor-pointer; /* Hover nos dias fica cinza claro */
+  @apply bg-gray-100 cursor-pointer;
+  /* Hover nos dias fica cinza claro */
 }
 
 :deep(.evento-reserva:hover) {
@@ -497,11 +484,11 @@ export default {
   :deep(.fc-toolbar) {
     @apply flex-col gap-3;
   }
-  
+
   :deep(.fc-toolbar-chunk) {
     @apply flex justify-center;
   }
-  
+
   :deep(.fc-button-group) {
     @apply flex-wrap gap-1;
   }
@@ -517,14 +504,14 @@ export default {
   justify-content: center;
   z-index: 50;
   padding: 1rem;
-  
+
   /* Fundo transparente */
   background-color: rgba(0, 0, 0, 0.7);
-  
+
   /* Efeito embaçado */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  
+
   /* Animação suave */
   animation: fadeInBlur 0.3s ease-out;
 }
@@ -534,6 +521,7 @@ export default {
     opacity: 0;
     backdrop-filter: blur(0px);
   }
+
   to {
     opacity: 1;
     backdrop-filter: blur(8px);

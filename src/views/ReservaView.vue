@@ -369,32 +369,33 @@
 
                   <v-card-text>
                     <div class="flex items-center space-x-2 mb-4">
-                      <v-checkbox v-model="coffeeBreakRequested" label="Solicitar Coffee Break"
+                      <v-checkbox v-model="formData.needsCoffee" label="Solicitar Coffee Break"
                         @change="toggleCoffeeBreak" hide-details color="red"></v-checkbox>
-                      <v-chip v-if="coffeeBreakRequested" color="secondary" class="ml-2" size="small">
+                      <v-chip v-if="formData.needsCoffee" color="secondary" class="ml-2" size="small">
                         <CoffeeIcon class="w-3 h-3 mr-1" />
                         Solicitado
                       </v-chip>
                     </div>
 
                     <v-expand-transition>
-                      <div v-if="coffeeBreakRequested && coffeeBreakExpanded"
+                      <div v-if="formData.needsCoffee && coffeeBreakExpanded"
                         class="space-y-4 mt-4 p-4 bg-gray-50 rounded-lg">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
+                          <!-- <div>
                             <v-text-field v-model="formData.coffeeParticipants" label="Quantidade de Pessoas *"
                               type="number" :required="coffeeBreakRequested" placeholder="Ex: 8"
                               hide-details></v-text-field>
-                          </div>
+                          </div> -->
                           <div>
-                            <v-combobox v-model="formData.serviceType" :items="servicosCafe" item-title="text" item-value="value" label="Tipo de Serviço *"
-                              :required="coffeeBreakRequested" placeholder="Selecione o tipo" hide-details></v-combobox>
+                            <v-combobox v-model="formData.coffee.type" :items="servicosCafe" item-title="text"
+                              item-value="value" label="Tipo de Serviço *" :required="formData.needsCoffee"
+                              placeholder="Selecione o tipo" hide-details></v-combobox>
                           </div>
                         </div>
                         <div>
-                          <v-textarea v-model="formData.observations" label="Observações"
+                          <v-textarea v-model="formData.coffee.observation" label="Observações"
                             placeholder="Ex: sem açúcar, incluir chá, água gelada, restrições alimentares..."
-                            hide-details></v-textarea>
+                            hide-details />
                         </div>
                       </div>
                     </v-expand-transition>
@@ -525,8 +526,12 @@ const formData = ref({
   eventType: '',
   participants: '',
   participantCount: '',
+  notes: '',
   needsCoffee: false,
-  notes: ''
+  coffee: {
+    observation: "",
+    type: ""
+  }
 })
 
 // Data mínima (hoje)
@@ -586,7 +591,7 @@ const participantTypes = [
 
 // Função para atualizar o colapsável
 const toggleCoffeeBreak = () => {
-  coffeeBreakExpanded.value = coffeeBreakRequested.value;
+  formData.value.needsCoffee = formData.value.needsCoffee;
 };
 
 const selectedEventType = computed(() => {
@@ -622,7 +627,8 @@ const isFormValid = computed(() => {
     formData.value.date !== '' &&
     formData.value.start !== '' &&
     formData.value.end !== '' &&
-    formData.value.start < formData.value.end
+    formData.value.start < formData.value.end &&
+    formData.value.participantCount !== ''
 })
 
 // Verificar conflitos de horário
@@ -669,18 +675,24 @@ const handleSubmit = () => {
     return
   }
 
+  if (!formData.value.participantCount) {
+    alert('Numero de participantes não pode ser zero!')
+    return
+  }
+
   const reservaData = {
     id: Date.now(),
-    sala: formData.value.room,
+    sala: formData.value.rooms,
     responsavel: formData.value.responsibleName,
-    tipoevento: formData.value.eventType || formData.value.title,
+    tipoevento: formData.value.eventType || "",
     data: formData.value.date,
     horaInicio: formData.value.start,
     horaFinal: formData.value.end,
-    participantes: formData.value.participants,
-    quantidade: formData.value.participantCount || 0,
-    cafe: formData.value.needsCoffee ? 'Sim' : 'Não',
-    observacoes: formData.value.notes
+    participantes: formData.value.participants || "",
+    quantidade: formData.value.participantCount,
+    observacoes: formData.value.notes,
+    cafe: formData.value.needsCoffee,
+    cafeDetalhes: formData.value.coffee || {}
   }
 
   // Salvar no localStorage
