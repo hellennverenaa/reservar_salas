@@ -1,22 +1,22 @@
-
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
+import { RouterView } from 'vue-router'
+import Header from './components/Header.vue';
 
 </script>
 
 <template>
-  <header>
-    <div class="app">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/calendario">Calendário</RouterLink>      
-        <RouterLink to="/LiberarCoffee">Admin coffee Break</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div class="bg-gray-50 min-h-screen">
+    <Header/>
 
-  <RouterView />
+    <main class="
+      w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+      pt-20 pb-20 /* Padding para compensar o cabeçalho e o nav mobile */
+      md:pt-24 md:pb-8 /* Padding para compensar apenas o cabeçalho no desktop */">
+
+      <router-view />
+
+    </main>
+  </div>
 </template>
 
 <style scoped>
@@ -60,6 +60,7 @@ nav a {
   transition: background 0.2s, color 0.2s;
   border: none;
 }
+
 nav a.router-link-exact-active,
 nav a.router-link-active {
   background: #151416;
@@ -67,6 +68,7 @@ nav a.router-link-active {
   font-weight: 700;
   box-shadow: 0 2px 8px #0001;
 }
+
 nav a:hover {
   background: #191819;
   color: #fff;
@@ -76,13 +78,31 @@ nav a:hover {
   .wrapper {
     padding: 0.5rem 0.5rem;
   }
+
   nav {
     gap: 0.5rem;
     padding: 0.7rem 0;
   }
+
   nav a {
     font-size: 0.98rem;
     padding: 0.5rem 0.7rem;
   }
+}
+
+/* Estilo para o link ativo no desktop */
+.md .router-link-exact-active {
+  color: #ef4444;
+  /* red-500 */
+  background-color: #374151;
+  /* gray-700 */
+}
+
+/* Estilo para o link ativo no mobile */
+.router-link-exact-active {
+  color: #ef4444;
+  /* red-500 */
+  background-color: #1F2937;
+  /* gray-800 */
 }
 </style>
