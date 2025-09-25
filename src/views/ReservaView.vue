@@ -591,7 +591,7 @@ const participantTypes = [
 
 // Função para atualizar o colapsável
 const toggleCoffeeBreak = () => {
-  formData.value.needsCoffee = formData.value.needsCoffee;
+  coffeeBreakExpanded.value = formData.value.needsCoffee;
 };
 
 const selectedEventType = computed(() => {
@@ -692,7 +692,8 @@ const handleSubmit = () => {
     quantidade: formData.value.participantCount,
     observacoes: formData.value.notes,
     cafe: formData.value.needsCoffee,
-    cafeDetalhes: formData.value.coffee || {}
+   cafeDetalhes: formData.value.needsCoffee ? formData.value.coffee : {},
+    ...(formData.value.needsCoffee && { coffeeStatus: 'solicitado' })
   }
 
   // Salvar no localStorage
