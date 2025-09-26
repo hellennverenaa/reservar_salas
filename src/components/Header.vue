@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="z-50">
     <!-- Normal Nav -->
     <header v-if="!isMobile" class="
-      w-full bg-gray-500 text-white shadow-lg z-40 fixed top-0 left-0 right-0 h-16 
+      w-full bg-gray-500 text-white shadow-lg fixed top-0 left-0 right-0 h-16 
       md:h-20 flex items-center justify-between px-4 md:px-8">
 
       <div class="flex items-center gap-3">

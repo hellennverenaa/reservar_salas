@@ -16,7 +16,7 @@
       <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-yellow-400/10 rounded-full blur-3xl animate-pulse"
         style="animation-delay: 2s" />
 
-      <div class="relative z-10 max-w-5xl mx-auto p-6">
+      <div class="relative max-w-5xl mx-auto p-6">
         <!-- Header Moderno -->
         <div class="mb-12">
           <div class="flex items-center justify-between">
@@ -62,7 +62,7 @@
           <div
             class="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white px-8 py-6 relative overflow-hidden">
             <div class="absolute inset-0 bg-black/10"></div>
-            <div class="relative z-10">
+            <div class="relative">
               <h2 class="text-2xl font-bold flex items-center">
                 <div class="bg-white/20 p-3 rounded-full mr-4">
                   <PlusIcon class="w-6 h-6" />
@@ -506,6 +506,7 @@ import {
 const voltarHome = () => {
   router.push('/')
 }
+
 // Estados do formulário
 const coffeeBreakRequested = ref(false);
 const coffeeBreakExpanded = ref(false);
