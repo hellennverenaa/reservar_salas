@@ -1,16 +1,15 @@
 <template>
   <div class="min-h-screen relative overflow-hidden bg-white">
     <!-- Background com mais vermelho e preto -->
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-red-600/20 rounded-full blur-3xl animate-pulse" />
+    <div class="absolute top-0 right-0 w-[400px] h-[700px] bg-red-600/20 rounded-full blur-3xl animate-pulse" />
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-black/15 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s" />
     <div class="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-red-700/15 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s" />
-    <div class="absolute bottom-1/3 right-1/3 w-[300px] h-[300px] bg-gray-900/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 3s" />
+    <div class="absolute bottom-1/3 right-1/3 w-[300px] h-[800px] bg-gray-900/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 3s" />
     
-    <!-- Navegação Superior -->
-    <nav class="relative z-20 flex justify-between items-center p-6">
+    <div class="relative z-10 flex justify-between items-center p-6">
       <div class="flex items-center space-x-2">
         <CalendarIcon class="w-8 h-8 text-red-600" />
-        <span class="text-xl font-bold text-black">Sistema de Reservas</span>
+        <span class="text-xl font-bold text-black">Sistema de Reservas DASS</span>
       </div>
       
       <!-- Navegação se estiver em outra página -->
@@ -27,34 +26,34 @@
           {{ titulosPagina[paginaAtual] }}
         </div>
       </div>
-    </nav>
+    </div>
 
     <!-- Home Page -->
-    <div v-if="paginaAtual === 'home'" class="relative z-10 flex items-center justify-center min-h-screen p-4">
+    <div v-if="paginaAtual === 'home'" class="relative z-7 flex items-center justify-center min-h-screen p-0 fade-in-up">
       <div class="text-center max-w-4xl mx-auto">
         <!-- Hero Section com mais preto e vermelho -->
-        <div class="mb-16">
-          <div class="flex justify-center mb-8">
+        <div class="mb-0 space-y-6">
+          <div class="flex justify-center mb-0">
             <div class="relative group">
               <div class="bg-white p-10 rounded-3xl shadow-2xl border-2 border-red-600/20 backdrop-blur-sm transform transition-all duration-700 group-hover:scale-110 group-hover:rotate-3 hover:shadow-red-600/25 hover:border-red-600/40">
-                <CalendarIcon class="w-24 h-24 text-black animate-pulse" />
+                <CalendarIcon class="w-14 h-14 text-black animate-pulse" />
               </div>
               <!-- Elementos decorativos vermelhos e pretos -->
-              <div class="absolute -top-3 -right-3 w-8 h-8 bg-red-600 rounded-full animate-bounce shadow-lg"></div>
+              <div class="absolute -top-4 -right-9 w-8 h-8 bg-red-600 rounded-full animate-bounce shadow-lg"></div>
               <div class="absolute -bottom-3 -left-3 w-6 h-6 bg-black rounded-full animate-ping shadow-lg"></div>
               <div class="absolute top-1/2 -left-6 w-4 h-4 bg-red-700 rounded-full animate-pulse"></div>
               <div class="absolute top-1/4 -right-4 w-3 h-3 bg-gray-800 rounded-full animate-bounce" style="animation-delay: 0.5s"></div>
             </div>
           </div>
           
-          <div class="space-y-8 mb-16">
-            <h1 class="text-black max-w-3xl mx-auto leading-tight text-6xl font-black">
+          <div class="space-y-2 mb-002">
+            <h1 class="text-black max-w-3xl mx-auto leading-tight text-4xl font-black">
               Reserve Salas de Reunião com 
-              <span class="text-red-600 ml-3 font-bold">
+              <span class="text-red-600 ml-3 font-regular">
                 Excelência
               </span>
             </h1>
-            <p class="text-gray-700 max-w-2xl mx-auto leading-relaxed text-xl">
+            <p class="text-gray-700 max-w-xl mx-auto leading-relaxed text-xl">
               🏢 Gerencie reservas de salas de forma profissional e eficiente. 
               ⚡ Sistema empresarial robusto para controle total de recursos.
             </p>
@@ -153,16 +152,6 @@
       </div>
     </div>
 
-    <!-- Página de Reserva -->
-    <div v-else-if="paginaAtual === 'reserva'" class="relative z-10 pt-20">
-      <ReservaView @voltar-home="voltarHome" @reserva-criada="aoReservaCriada" />
-    </div>
-
-    <!-- Página de Calendário -->
-    <div v-else-if="paginaAtual === 'calendario'" class="relative z-10 pt-20">
-      <CalendarView @voltar-home="voltarHome" />
-    </div>
-
     <!-- Notificação de Sucesso -->
     <div 
       v-if="mostrarNotificacao"
@@ -181,6 +170,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { 
   Calendar as CalendarIcon, 
   Clock as ClockIcon, 
@@ -192,7 +182,8 @@ import {
   ArrowLeft as ArrowLeftIcon 
 } from 'lucide-vue-next'
 
-import CalendarView from "./CalendarView.vue"
+const router = useRouter()
+
 import ReservaView from "./ReservaView.vue"
 
 // Estados da aplicação
@@ -209,7 +200,7 @@ const titulosPagina = {
 
 // Métodos de navegação
 const irParaReserva = () => {
-  paginaAtual.value = 'reserva'
+  router.push("reserva-sala")
 }
 
 const irParaCalendario = () => {

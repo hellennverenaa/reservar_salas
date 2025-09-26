@@ -21,7 +21,7 @@
         <div class="mb-12">
           <div class="flex items-center justify-between">
             <!-- Botão Voltar Elegante -->
-            <button @click="$emit('voltar-home')"
+            <button @click="voltarHome"
               class="group flex items-center px-6 py-3 bg-white hover:bg-gray-100 text-gray-700 hover:text-red-600 border-2 border-gray-200 hover:border-red-300 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium">
               <ArrowLeftIcon class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
               <span>Voltar ao Início</span>
@@ -440,7 +440,7 @@
 
             <!-- Botões de Ação -->
             <div class="flex flex-col sm:flex-row gap-6 pt-8 border-t-2 border-gray-100">
-              <button type="button" @click="$emit('voltar-home')"
+              <button type="button" @click="('voltar-home')"
                 class="flex-1 group px-8 py-6 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-gray-300">
                 <ArrowLeftIcon class="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform duration-300" />
                 Cancelar
@@ -481,7 +481,8 @@ function fetchUser(params) {
   }, 1000);
 }
 
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 import {
   Coffee as CoffeeIcon,
   Plus as PlusIcon,
@@ -502,7 +503,10 @@ import {
 
 } from 'lucide-vue-next'
 
-
+const voltarHome = () => {
+  router.push('/')
+}
+// Estados do formulário
 const coffeeBreakRequested = ref(false);
 const coffeeBreakExpanded = ref(false);
 

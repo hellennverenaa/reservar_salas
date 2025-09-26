@@ -44,9 +44,9 @@ header {
   background: linear-gradient(90deg, #141415 0%, #afacb5 100%);
   box-shadow: 0 2px 14px rgba(233, 229, 229, 0.067);
   padding: 1;
-  position: 10px;
+  position: 0px;
   top: 0;
-  z-index: 4;
+  z-index: 2;
 }
 
 .wrapper {
