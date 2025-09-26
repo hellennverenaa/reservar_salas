@@ -1,18 +1,12 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { HomeIcon, CalendarIcon, CoffeeIcon } from 'lucide-vue-next';
-
-</script>
-
 <template>
-  <div class="bg-gray-50 min-h-screen">
+  <div>
     <!-- Normal Nav -->
-    <header class="
-      w-full bg-gray-900 text-white shadow-lg z-50 fixed top-0 left-0 right-0 h-16 
+    <header v-if="!isMobile" class="
+      w-full bg-gray-500 text-white shadow-lg z-40 fixed top-0 left-0 right-0 h-16 
       md:h-20 flex items-center justify-between px-4 md:px-8">
 
       <div class="flex items-center gap-3">
-        <CalendarIcon class="w-6 h-6 text-red-500" />
+        <CalendarIcon class="w-6 h-6 text-red-900" />
         <span class="text-lg md:text-xl font-semibold">Sistema de Reservas</span>
       </div>
 
@@ -48,17 +42,8 @@ import { HomeIcon, CalendarIcon, CoffeeIcon } from 'lucide-vue-next';
       </div>
     </header>
 
-    <main class="
-      w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-      pt-20 pb-20 /* Padding para compensar o cabeçalho e o nav mobile */
-      md:pt-24 md:pb-8 /* Padding para compensar apenas o cabeçalho no desktop */">
-
-      <router-view />
-
-    </main>
-
     <!-- bottom nav -->
-    <nav class="
+    <nav v-else class="
       fixed bottom-0 left-0 w-full h-16 bg-gray-900 text-white shadow-lg z-50
       md:hidden">
       <ul class="flex justify-around items-center h-full">
@@ -87,6 +72,18 @@ import { HomeIcon, CalendarIcon, CoffeeIcon } from 'lucide-vue-next';
     </nav>
   </div>
 </template>
+
+<script setup>
+import { RouterLink } from 'vue-router'
+import { HomeIcon, CalendarIcon, CoffeeIcon } from 'lucide-vue-next';
+
+const props = defineProps({
+  isMobile: {
+    type: Boolean,
+    required: true
+  }
+})
+</script>
 
 <style scoped>
 header {

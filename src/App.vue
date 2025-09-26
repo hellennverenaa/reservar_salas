@@ -1,17 +1,36 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue"
 import { RouterView } from 'vue-router'
 import Header from './components/Header.vue';
 
+const breakPoint = 768; // ponto de interrupção para mobile
+const windowSize = ref(window.innerWidth)
+const isMobile = ref(window.innerWidth < breakPoint)
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    windowSize.value = window.innerWidth
+    isMobile.value = windowSize.value < breakPoint
+  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', () => {
+    windowSize.value = window.innerWidth
+    isMobile.value = windowSize.value < breakPoint
+  })
+})
 </script>
 
 <template>
   <div class="bg-gray-50 min-h-screen">
-    <Header/>
+    <Header :isMobile="isMobile" />
 
     <main class="
       w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-      pt-20 pb-20 /* Padding para compensar o cabeçalho e o nav mobile */
-      md:pt-24 md:pb-8 /* Padding para compensar apenas o cabeçalho no desktop */">
+      md:pt-24 md:pb-8"
+      :class="isMobile ? 'pb-20' : 'pt-20'"
+      >
 
       <router-view />
 
