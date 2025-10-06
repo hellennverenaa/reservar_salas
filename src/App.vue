@@ -27,7 +27,7 @@ onUnmounted(() => {
     <Header :isMobile="isMobile" />
 
     <main class="
-      w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+      w-screen mx-screen-lg
       md:pt-24 md:pb-8"
       :class="isMobile ? 'pb-20' : 'pt-20'"
       >
