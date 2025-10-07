@@ -628,7 +628,7 @@ const conflictMessage = ref('')
 const isFormValid = computed(() => {
   return formData.value.responsibleName.trim() !== '' &&
     formData.value.title.trim() !== '' &&
-    formData.value.room !== '' &&
+    formData.value.rooms !== '' &&
     formData.value.date !== '' &&
     formData.value.start !== '' &&
     formData.value.end !== '' &&
@@ -638,7 +638,9 @@ const isFormValid = computed(() => {
 
 // Verificar conflitos de horário
 const checkConflicts = () => {
-  if (!formData.value.room || !formData.value.date || !formData.value.start || !formData.value.end) {
+  console.log('Amo agua');
+
+  if (!formData.value.rooms || !formData.value.date || !formData.value.start || !formData.value.end) {
     conflictMessage.value = ''
     return
   }
@@ -646,19 +648,68 @@ const checkConflicts = () => {
   // Simulação de verificação de conflitos - você pode conectar com localStorage aqui
   const existingBookings = JSON.parse(localStorage.getItem('reservas_salas') || '[]')
 
-  const conflicts = existingBookings.filter(booking => {
-    return booking.sala === formData.value.room &&
+  const funcaoiANtiga = booking => {
+    return booking.sala === formData.value.rooms &&
       booking.data === formData.value.date &&
       (
         (formData.value.start >= booking.horaInicio && formData.value.start < booking.horaFinal) ||
         (formData.value.end > booking.horaInicio && formData.value.end <= booking.horaFinal) ||
         (formData.value.start <= booking.horaInicio && formData.value.end >= booking.horaFinal)
       )
-  })
+  }
+
+
+  const verificaSala = (reserva) => {
+    if (reserva.sala === formData.value.rooms) {
+      return true
+    }
+    return false
+  }
+  const verificaData = (reserva) => {
+    if (reserva.data === formData.value.date) {
+      return true
+    }
+    return false
+  }
+  const verificaHoraInicio = (reserva) => {
+    if (formData.value.start >= reserva.horaInicio && formData.value.start < reserva.horaFinal) {
+      return true
+    }
+    return false
+  }
+  const verificaHoraFinal = (reserva) => {
+    if (formData.value.end > reserva.horaInicio && formData.value.end <= reserva.horaFinal) {
+      return true
+    }
+    return false
+  }
+
+  const conflicts = existingBookings.filter(
+    (reserva) => {
+      if (verificaSala(reserva)) {
+        if (verificaData(reserva)) {
+          if (verificaHoraInicio(reserva) || verificaHoraFinal(reserva)) {
+            return true
+          }
+        }
+      }
+
+      return false;
+    }
+  )
+  
+  console.log("Conflitos encontrados:");
+  
+  console.log(conflicts);
+  
 
   if (conflicts.length > 0) {
+    alert("Nao pode reservar porqiue ja tem nese horario")
     const conflict = conflicts[0]
-    conflictMessage.value = `A sala "${formData.value.room}" já está reservada das ${conflict.horaInicio} às ${conflict.horaFinal} para "${conflict.tipoevento}"`
+    conflictMessage.value = `A sala "${formData.value.rooms}" já está reservada das ${conflict.horaInicio} às ${conflict.horaFinal} para "${conflict.tipoevento}"`
+    formData.value.start = ''
+    formData.value.end = '' 
+
   } else {
     conflictMessage.value = ''
   }
@@ -666,7 +717,7 @@ const checkConflicts = () => {
 
 // Watch para verificar conflitos
 watch([
-  () => formData.value.room,
+  () => formData.value.rooms,
   () => formData.value.date,
   () => formData.value.start,
   () => formData.value.end
@@ -677,6 +728,7 @@ watch([
 // Submissão do formulário
 const handleSubmit = () => {
   if (!isFormValid.value || conflictMessage.value) {
+    alert('Formulario invalido')
     return
   }
 
@@ -697,7 +749,7 @@ const handleSubmit = () => {
     quantidade: formData.value.participantCount,
     observacoes: formData.value.notes,
     cafe: formData.value.needsCoffee,
-   cafeDetalhes: formData.value.needsCoffee ? formData.value.coffee : {},
+    cafeDetalhes: formData.value.needsCoffee ? formData.value.coffee : {},
     ...(formData.value.needsCoffee && { coffeeStatus: 'solicitado' })
   }
 
@@ -705,6 +757,26 @@ const handleSubmit = () => {
   const reservasExistentes = JSON.parse(localStorage.getItem('reservas_salas') || '[]')
   reservasExistentes.push(reservaData)
   localStorage.setItem('reservas_salas', JSON.stringify(reservasExistentes))
+
+  alert('Reserva criada com sucesso!')
+
+  formData.value = {
+    responsibleName: '',
+    title: '',
+    rooms: '',
+    date: '',
+    start: '',
+    end: '',
+    eventType: '',
+    participants: '',
+    participantCount: '',
+    notes: '',
+    needsCoffee: false,
+    coffee: {
+      observation: "",
+      type: ""
+    }
+  }
 
   // Emitir eventos
   window.dispatchEvent(new CustomEvent('reserva-adicionada'))
