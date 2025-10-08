@@ -110,43 +110,43 @@
         </div>
 
         <!-- Feature Cards com mais vermelho e preto -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-9 mb-2 px-9 md:px-0 sm:-mt-12">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-9 px-3 md:px-0">
+        <div class="flex justify-center mb-2 sm:-mt-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 md:px-0 max-w-5xl w-full">
             <div
-              class="group bg-white items-start pt-2 backdrop-blur-sm p-1 rounded-xl shadow-lg border-2 border-red-800/20 hover:border-red-600/30 transition-all duration-700 hover:scale-105 hover:-translate-y-2 hover:rotate-1">
+              class="group bg-white items-start pt-2 backdrop-blur-sm p-6 rounded-xl shadow-lg border-2 border-red-800/20 hover:border-red-600/30 transition-all duration-700 hover:scale-105 hover:-translate-y-2 hover:rotate-1">
 
               <div
-                class="bg-red-600 w-12 h-12 rounded-xl flex items-start pt-3 justify-center mx-auto mb-3 group-hover:bg-red-700 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:rotate-6">
+                class="bg-red-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-red-700 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:rotate-6">
                 <CalendarIcon class="w-6 h-6 text-white" />
               </div>
 
-              <h3 class="text-black mb-5 text-base font-bold">📅 Agenda Integrada</h3>
+              <h3 class="text-black mb-3 text-base font-bold">📅 Agenda Integrada</h3>
               <p class="text-gray-700 leading-tight text-sm">
                 Visualize disponibilidade em tempo real com nosso calendário profissional
               </p>
             </div>
                 
             <div
-              class="group bg-white items-start pt-2 backdrop-blur-sm p-3 rounded-xl shadow-lg border-2 border-black/20 hover:border-black/30 transition-all duration-700 hover:scale-105 hover:-translate-y-2 hover:-rotate-1"
+              class="group bg-white items-start pt-2 backdrop-blur-sm p-6 rounded-xl shadow-lg border-2 border-black/20 hover:border-black/30 transition-all duration-700 hover:scale-105 hover:-translate-y-2 hover:-rotate-1"
               style="animation-delay: 0.2s">
               <div
-                class="bg-black w-12 h-12 rounded-xl flex items-start items-center justify-center mx-auto mb-3 group-hover:bg-gray7800 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:-rotate-6">
+                class="bg-black w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-800 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:-rotate-6">
                 <ClockIcon class="w-6 h-6 text-white" />
               </div>
-              <h3 class="text-black mb-5 text-base font-bold">⚡ Reserva Rápida</h3>
+              <h3 class="text-black mb-3 text-base font-bold">⚡ Reserva Rápida</h3>
               <p class="text-gray-700 leading-tight text-sm">
                 Agende reuniões em poucos cliques com nosso sistema eficiente
               </p>
             </div>
           
             <div
-              class="group bg-white items-start pt-2 backdrop-blur-sm p-3 rounded-xl shadow-lg border-2 border-red-700/20 hover:border-red-700/30 transition-all duration-700 hover:scale-105 hover:-translate-y-2 hover:rotate-1"
+              class="group bg-white items-start pt-2 backdrop-blur-sm p-6 rounded-xl shadow-lg border-2 border-red-700/20 hover:border-red-700/30 transition-all duration-700 hover:scale-105 hover:-translate-y-2 hover:rotate-1"
               style="animation-delay: 0.4s">
               <div
-                class="bg-red-700 w-12 h-12 rounded-xl flex items-start pt-3 justify-center mx-auto mb-3 group-hover:bg-red-800 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:rotate-6">
+                class="bg-red-700 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-red-800 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:rotate-6">
                 <UsersIcon class="w-6 h-6 text-white" />
               </div>
-              <h3 class="text-black mb-2 text-base font-bold">👥 Controle Total</h3>
+              <h3 class="text-black mb-3 text-base font-bold">👥 Controle Total</h3>
               <p class="text-gray-700 leading-tight text-sm">
                 Gestão completa de participantes e recursos corporativos
               </p>
