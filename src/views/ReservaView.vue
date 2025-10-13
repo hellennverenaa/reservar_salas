@@ -8,7 +8,7 @@
     </div> -->
 
     <!-- Conteudo Reserva -->
-    <div class="min-h-screen relative overflow-hidden bg-gray-50">
+    <div class="min-h-screen relative overflow-hidden bg-gray-50 py-3">
       <!-- Background decorativo -->
       <div class="absolute top-0 right-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" />
       <div class="absolute bottom-0 left-0 w-80 h-80 bg-black/5 rounded-full blur-3xl animate-pulse"
@@ -16,14 +16,14 @@
       <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-yellow-400/10 rounded-full blur-3xl animate-pulse"
         style="animation-delay: 2s" />
 
-      <div class="relative max-w-5xl mx-auto p-6">
+      <div class="relative max-w-6xl mx-auto p-14">
         <!-- Header Moderno -->
-        <div class="mb-12">
-          <div class="flex items-center justify-between">
+        <div class="mb-2">
+          <div class="flex items-center justify-between mb-3">
             <!-- Botão Voltar Elegante -->
             <button @click="voltarHome"
-              class="group flex items-center px-6 py-3 bg-white hover:bg-gray-100 text-gray-700 hover:text-red-600 border-2 border-gray-200 hover:border-red-300 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium">
-              <ArrowLeftIcon class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+              class="group flex -mt-24 items-center px-3 py-2 bg-white hover:bg-gray-100 text-gray-700 hover:text-red-600 border-2 border-gray-200 hover:border-red-300 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium">
+              <ArrowLeftIcon class="w-3 h-3 mr-1 group-hover:-translate-x-1 transition-transform duration-300" />
               <span>Voltar ao Início</span>
             </button>
 
@@ -31,47 +31,47 @@
 
             <!-- Status Badge -->
             <div
-              class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold border-2 border-yellow-200">
+              class="bg-yellow-100 -mt-24 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold border-2 border-yellow-200">
               ✨ Nova Reserva
             </div>
           </div>
 
 
 
-          <!-- Título Principal -->
-          <div class="text-center mt-8 mb-6">
-            <div
-              class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-2xl mb-6">
-              <CalendarIcon class="w-10 h-10 text-white" />
+          <!-- Título Principal Compacto -->
+          <div class="text-center">
+            <div class="inline-flex items-center justify-center w-12 h-12 -mt-36 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-lg mb-2">
+              <CalendarIcon class="w-6 h-6 text-white" />
             </div>
-            <h1 class="text-5xl font-black text-gray-900 mb-4">
+            <h1 class="text-3xl font-black text-gray-900 mb-1">
               Nova <span class="text-red-600">Reserva</span>
             </h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Preencha os dados abaixo para agendar sua sala com segurança e praticidade
+            <p class="text-sm text-gray-600 max-w-2xl mx-auto">
+              Preencha os dados abaixo para agendar sua sala
             </p>
           </div>
         </div>
 
         <!-- Formulário Principal -->
         <form @submit.prevent="handleSubmit"
-          class="bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
+          class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
 
 
-          <!-- Header do Formulário -->
-          <div
-            class="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white px-8 py-6 relative overflow-hidden">
+       <!-- Header do Formulário -->
+          <div class="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white px-4 py-3 relative overflow-hidden">
             <div class="absolute inset-0 bg-black/10"></div>
-            <div class="relative">
-              <h2 class="text-2xl font-bold flex items-center">
-                <div class="bg-white/20 p-3 rounded-full mr-4">
-                  <PlusIcon class="w-6 h-6" />
-                </div>
-                Informações da Reserva
-              </h2>
-              <p class="text-red-100 mt-2">Todos os campos marcados com * são obrigatórios</p>
+            <div class="relative flex items-center">
+              <div class="bg-white/20 p-2 rounded-full mr-3">
+                <PlusIcon class="w-4 h-4" />
+              </div>
+              <div>
+                <h2 class="text-lg font-bold">Informações da Reserva</h2>
+                <p class="text-red-100 text-xs">Campos com * são obrigatórios</p>
+              </div>
             </div>
+          </div>
 
+          <div class="p-4 space-y-4">
 
 
             <!-- Elementos decorativos -->
@@ -84,27 +84,27 @@
 
 
             <!-- Seção 1: Informações Pessoais -->
-            <div class="space-y-6">
-              <div class="flex items-center mb-6">
-                <div class="bg-red-100 p-3 rounded-full mr-4">
-                  <UserIcon class="w-5 h-5 text-red-600" />
+            <div class="space-y-1 -mt-14">
+              <div class="flex items-center mb-2">
+                <div class="bg-red-100 p-2 rounded-full mr-2">
+                  <UserIcon class="w-4 h-4 text-red-600" />
                 </div>
-                <h3 class="text-xl font-bold text-gray-900">👤 Informações Pessoais</h3>
+                <h3 class="text-base font-bold text-gray-900">👤 Informações Pessoais</h3>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 
 
 
                 <!-- Nome do Responsável -->
-                <div class="space-y-2">
+                <div class="space-y-1">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Nome do Responsável *
                   </label>
                   <div class="relative">
                     <input v-model="formData.responsibleName" type="text" required
                       placeholder="Digite seu nome completo"
-                      class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-600 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12">
+                      class="w-full px-3 py-2 border-2 border-solid border-gray-600 rounded-2xl focus:border-red-600 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-9">
                     <UserIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
@@ -112,14 +112,14 @@
 
 
                 <!-- Título da Reserva -->
-                <div class="space-y-2">
+                <div class="space-y-1">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Título da Reserva *
                   </label>
                   <div class="relative">
                     <input v-model="formData.title" type="text" required
-                      placeholder="Ex: Reunião da Equipe de Marketing"
-                      class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12" />
+                      placeholder="Ex: Reunião de Consumo"
+                      class="w-full px-3 py-2 border-2 border-solid border-gray-600 rounded-2xl focus:border-red-600 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-9" />
                     <FileTextIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
@@ -128,17 +128,17 @@
 
 
             <!-- Seção 2: Local e Data -->
-            <div class="space-y-6">
-              <div class="flex items-center mb-6">
-                <div class="bg-black/10 p-3 rounded-full mr-4">
-                  <MapPinIcon class="w-5 h-5 text-black" />
+            <div class="space-y-3 mt-2">
+              <div class="flex items-center mb-2">
+                <div class="bg-black/10 p-2 rounded-full mr-2">
+                  <MapPinIcon class="w-4 h-4 text-black" />
                 </div>
-                <h3 class="text-xl border-solid text-gray-900">🏛️ Local e Data</h3>
+                <h3 class="text-base font-bold text-gray-900">🏛️ Local e Data</h3>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <!-- Sala -->
-                <div class="space-y-2">
+                <div class="space-y-1">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Selecione a Sala
                   </label>
@@ -146,10 +146,10 @@
                     <Listbox v-model="formData.rooms">
                       <div class="relative mt-1">
                         <ListboxButton
-                          class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-4 pl-12 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300">
+                          class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-600 bg-white py-3 pl-8 pr-8 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300">
                           <span class="flex items-center">
                             <TagIcon class="absolute left-4 w-5 h-5 text-gray-400" />
-                            <span class="ml-4 block truncate">{{ selectedRooms }}</span>
+                            <span class="ml-3 block truncate">{{ selectedRooms }}</span>
                           </span>
                           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -187,12 +187,12 @@
 
                 <!-- Data -->
                 <div class="space-y-2">
-                  <label class="block text-sm font-bold text-gray-800 mb-2">
+                  <label class="block text-sm font-bold text-gray-800 mb-1">
                     Data da Reserva *
                   </label>
                   <div class="relative">
                     <input v-model="formData.date" type="date" required :min="minDate"
-                      class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12" />
+                      class="w-full px-5 py-3 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-10" />
                     <CalendarIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
@@ -200,35 +200,35 @@
             </div>
 
             <!-- Seção 3: Horários -->
-            <div class="space-y-6">
-              <div class="flex items-center mb-6">
-                <div class="bg-yellow-100 p-3 rounded-full mr-4">
-                  <ClockIcon class="w-5 h-5 text-yellow-600" />
+            <div class="space-y-6 mt-2">
+              <div class="flex items-center mb-5">
+                <div class="bg-yellow-100 p-4 rounded-full mr-1">
+                  <ClockIcon class="w-4 h-4 text-yellow-600" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">⏰ Horários</h3>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-9">
                 <!-- Horário de Início -->
-                <div class="space-y-2">
+                <div class="space-y-2 -mt-4">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Horário de Início *
                   </label>
                   <div class="relative">
                     <input v-model="formData.start" type="time" required
-                      class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12" />
+                      class="w-full px-5 py-3 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-9" />
                     <ClockIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
 
                 <!-- Horário de Fim -->
-                <div class="space-y-2">
+                <div class="space-y-2 -mt-4">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Horário de Fim *
                   </label>
                   <div class="relative">
                     <input v-model="formData.end" type="time" required
-                      class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12" />
+                      class="w-full px-5 py-3 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-9" />
                     <ClockIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
@@ -236,7 +236,7 @@
             </div>
 
             <!-- Seção 4: Detalhes do Evento -->
-            <div class="space-y-6">
+            <div class="space-y-6 mt-3">
               <div class="flex items-center mb-6">
                 <div class="bg-red-100 p-3 rounded-full mr-4">
                   <UsersIcon class="w-5 h-5 text-red-600" />
@@ -248,7 +248,7 @@
 
 
                 <!-- Tipo de Evento -->
-                <div class="space-y-2">
+                <div class="space-y-2 -mt-4">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Tipo de Evento/Atividade
                   </label>
@@ -257,7 +257,7 @@
                     <Listbox v-model="formData.eventType">
                       <div class="relative mt-1">
                         <ListboxButton
-                          class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-4 pl-12 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300">
+                          class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-3 pl-7 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300">
                           <span class="flex items-center">
                             <TagIcon class="absolute left-4 w-5 h-5 text-gray-400" />
 
@@ -300,7 +300,7 @@
                 </div>
 
                 <!-- Tipo de Participantes -->
-                <div class="space-y-2">
+                <div class="space-y-2 -mt-4">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Tipo de Participantes
                   </label>
@@ -308,7 +308,7 @@
                     <Listbox v-model="formData.participants">
                       <div class="relative mt-1">
                         <ListboxButton
-                          class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-4 pl-12 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300">
+                          class="relative w-full cursor-default rounded-2xl border-2 border-solid border-gray-500 bg-white py-3 pl-7 pr-10 text-left shadow-md focus:border-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-red-300 sm:text-sm transition-all duration-300">
                           <span class="flex items-center">
                             <TagIcon class="absolute left-4 w-5 h-5 text-gray-400" />
                             <span class="ml-4 block truncate">{{ selectedParticipants }}</span>
@@ -348,14 +348,14 @@
                 </div>
 
                 <!-- Número de Participantes -->
-                <div class="space-y-2">
+                <div class="space-y-2 -mt-4">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
                     Número de Participantes
                   </label>
                   <div class="relative">
                     <input v-model="formData.participantCount" type="number" min="1" max="100"
                       placeholder="Ex: 10 pessoas"
-                      class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-12" />
+                      class="w-full px-5 py-3 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-800 font-medium pl-8" />
                     <HashIcon class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                 </div>
@@ -368,11 +368,11 @@
                   </v-card-title>
 
                   <v-card-text>
-                    <div class="flex items-center space-x-2 mb-4">
+                    <div class="flex items-center space-x-2 -mb-1">
                       <v-checkbox v-model="formData.needsCoffee" label="Solicitar Coffee Break"
                         @change="toggleCoffeeBreak" hide-details color="red"></v-checkbox>
                       <v-chip v-if="formData.needsCoffee" color="secondary" class="ml-2" size="small">
-                        <CoffeeIcon class="w-3 h-3 mr-1" />
+                        <CoffeeIcon class="w-4 h-4 mr-1" />
                         Solicitado
                       </v-chip>
                     </div>
@@ -405,7 +405,7 @@
             </div>
 
             <!-- Observações -->
-            <div class="space-y-6">
+            <div class="space-y-6 mt-3">
               <div class="flex items-center mb-6">
                 <div class="bg-yellow-100 p-3 rounded-full mr-4">
                   <MessageSquareIcon class="w-5 h-5 text-yellow-600" />
@@ -416,7 +416,7 @@
               <div class="relative">
                 <textarea v-model="formData.notes" rows="4"
                   placeholder="Digite aqui observações, instruções especiais ou requisitos adicionais para a reserva..."
-                  class="w-full px-6 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none resize-none transition-all duration-300 text-gray-800 font-medium pl-12"></textarea>
+                  class="w-full px-6 -mt-4 py-4 border-2 border-solid border-gray-500 rounded-2xl focus:border-red-500 focus:outline-none resize-none transition-all duration-300 text-gray-800 font-medium pl-12"></textarea>
                 <MessageSquareIcon class="absolute left-4 top-6 w-5 h-5 text-gray-400" />
               </div>
             </div>
@@ -439,9 +439,9 @@
             </div>
 
             <!-- Botões de Ação -->
-            <div class="flex flex-col sm:flex-row gap-6 pt-8 border-t-2 border-gray-100">
+            <div class="flex flex-col mt-5 sm:flex-row gap-6 pt-8 border-t-2 border-gray-100">
               <button type="button" @click="('voltar-home')"
-                class="flex-1 group px-8 py-6 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-gray-300">
+                class="flex-1 group px-5 py-5 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-gray-900 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl border-2 border-gray-200 hover:border-gray-300">
                 <ArrowLeftIcon class="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform duration-300" />
                 Cancelar
               </button>
@@ -822,7 +822,7 @@ input:focus,
 select:focus,
 textarea:focus {
   transform: translateY(-1px);
-  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 4px 12px -2px rgba(239, 68, 68, 0.2);
 }
 
 /* Animação dos ícones */
@@ -867,5 +867,12 @@ input[type="radio"]:checked {
 
 .gradient-button:hover {
   background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+}
+
+/* Responsividade adicional */
+@media (max-height: 800px) {
+  .min-h-screen {
+    min-height: auto;
+  }
 }
 </style>
