@@ -11,8 +11,8 @@
 
     <div class="relative z-10 flex justify-between items-center p-6">
       <div class="flex items-center space-x-2">
-        <CalendarIcon class="w-8 h-8 text-red-600" />
-        <span class="text-xl font-bold text-black">Sistema de Reservas DASS</span>
+        <CalendarIcon class="w-8 h-8 -mt-6 text-red-600" />
+        <span class="text-xl -mt-6 font-bold text-black">Sistema de Reservas DASS</span>
       </div>
 
       <!-- Navegação se estiver em outra página -->
@@ -38,7 +38,7 @@
           <div class="flex justify-center -mt-1">
             <div class="relative group">
               <div
-                class="bg-white p-10 rounded-3xl shadow-2xl border-2 border-red-600/20 backdrop-blur-sm transform transition-all duration-700 group-hover:scale-110 group-hover:rotate-3 hover:shadow-red-600/25 hover:border-red-600/40">
+                class="bg-white -mt-16 p-10 rounded-3xl shadow-2xl border-2 border-red-600/20 backdrop-blur-sm transform transition-all duration-700 group-hover:scale-110 group-hover:rotate-3 hover:shadow-red-600/25 hover:border-red-600/40">
                 <CalendarIcon class="w-14 h-14 text-black animate-pulse" />
               </div>
               <!-- Elementos decorativos vermelhos e pretos -->
