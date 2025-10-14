@@ -19,6 +19,13 @@
               <span class="font-medium">Home</span>
             </router-link>
           </li>
+            <li>
+            <router-link to="/reserva-sala"
+              class="flex items-center gap-2 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200">
+              <CalendarIcon class="w-5 h-5" />
+              <span class="font-medium">Nova Reserva</span>
+            </router-link>
+          </li>
           <li>
             <router-link to="/calendario"
               class="flex items-center gap-2 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200">
@@ -33,6 +40,7 @@
               <span class="font-medium">Admin Coffee</span>
             </router-link>
           </li>
+        
         </ul>
       </nav>
 
@@ -54,6 +62,13 @@
             <span class="text-xs font-medium">Home</span>
           </router-link>
         </li>
+         <li>
+            <router-link to="/reserva-sala"
+              class="flex items-center gap-2 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200">
+              <CalendarIcon class="w-5 h-5" />
+              <span class="font-medium">Nova Reserva</span>
+            </router-link>
+          </li>
         <li>
           <router-link to="/calendario"
             class="flex flex-col items-center justify-center w-full h-full p-2 rounded-lg text-gray-400 hover:text-white transition-colors duration-200">
@@ -76,6 +91,10 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { HomeIcon, CalendarIcon, CoffeeIcon } from 'lucide-vue-next';
+
+const irParaReserva = () => {
+  router.push("reserva-sala")
+}
 
 const props = defineProps({
   isMobile: {
