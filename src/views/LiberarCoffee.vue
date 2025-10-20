@@ -6,7 +6,7 @@
       <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
         <Coffee class="w-8 h-8 text-white" />
       </div>
-      <h2 class="text-3xl font-semibold mb-2">Painel de Controle</h2>
+      <h2 class="text-3xl font-bold mb-2 text-black">Painel de Controle</h2>
       <p class="text-gray-600">Gestão e coordenação do serviço de Coffee Break</p>
     </div>
 
@@ -70,7 +70,7 @@
 
         <!-- Lista de Pedidos -->
         <div>
-          <h3 class="text-lg font-semibold mb-4">
+          <h3 class="text-lg font-semibold mb-4 text-black">
             Pedidos para {{ formatDate(filterDate) }}
             <span class="text-gray-500 font-normal">({{ todayOrders.length }} pedidos)</span>
           </h3>
