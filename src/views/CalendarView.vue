@@ -105,7 +105,7 @@
       </div>
     </div>
 
-    <div v-if="modalExclusao" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+    <div v-if="modalExclusao" class="fixed inset-0 backdrop-blur bg-opacity-40 flex items-center justify-center z-50 p-4"
       @click="cancelarExclusao">
       <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6" @click.stop>
         <div class="text-center">
@@ -116,7 +116,7 @@
               </path>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Confirmar Exclusão</h3>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Confirmar Exclusão</h3>
           <p class="text-gray-600 mb-6">Tem certeza que deseja excluir esta reserva? Esta ação não pode ser desfeita.
           </p>
 
