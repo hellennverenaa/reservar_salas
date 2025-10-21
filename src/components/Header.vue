@@ -21,8 +21,8 @@
           </li>
             <li>
             <router-link to="/reserva-sala"
-              class="flex items-center gap-2 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200">
-              <CalendarIcon class="w-5 h-5" />
+              class="flex items-center gap-3 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200">
+              <CalendarIcon class="w-7 h-7" />
               <span class="font-medium">Nova Reserva</span>
             </router-link>
           </li>
@@ -64,8 +64,8 @@
         </li>
          <li>
             <router-link to="/reserva-sala"
-              class="flex items-center gap-2 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200">
-              <CalendarIcon class="w-5 h-5" />
+              class="flex flex-col items-center justify-center w-full h-full p-2 rounded-lg text-gray-400 hover:text-white transition-colors duration-200">
+              <CalendarIcon class="w-6 h-6" />
               <span class="font-medium">Nova Reserva</span>
             </router-link>
           </li>
