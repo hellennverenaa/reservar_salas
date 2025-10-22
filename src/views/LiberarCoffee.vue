@@ -58,11 +58,9 @@
             <label class="text-sm font-medium block mb-1">Tipo de Café</label>
             <select v-model="filterCoffeeType" class="w-full border rounded-md px-3 py-2 focus:ring-1 focus:ring-red-600 focus:outline-none">
               <option value="all">Todos os tipos</option>
-              <option value="simples">Coffee Break Simples</option>
-              <option value="completo">Coffee Break Completo</option>
-              <option value="premium">Coffee Break Premium</option>
-              <option value="saudavel">Coffee Break Saudável</option>
-              <option value="cafe-apenas">Apenas Café</option>
+              <option value="simples">Coffe Simples</option>
+              <option value="completo">Coffee Completo</option>
+              <option value="lanche">Lanche</option>
               <option value="personalizado">Personalizado</option>
             </select>
           </div>
