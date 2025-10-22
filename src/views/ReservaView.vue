@@ -1,5 +1,8 @@
 <template>
   <div>
+    
+
+    
     <!-- Verificação user -->
     <!-- <div v-if="!isAuthenticated" class="card-container" :class="{ 'active-border': isActive }" @click="toggleActive">
       <h1>Aproxime seu crachá para realizar a reserva.</h1>
@@ -421,22 +424,7 @@
               </div>
             </div>
 
-            <!-- Verificação de Conflitos -->
-            <div v-if="conflictMessage"
-              class="bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-200 rounded-2xl p-6 shadow-lg">
-              <div class="flex items-start">
-                <div class="bg-red-200 p-3 rounded-full mr-4 flex-shrink-0">
-                  <AlertTriangleIcon class="w-6 h-6 text-red-700" />
-                </div>
-                <div>
-                  <h4 class="font-bold text-red-800 text-lg mb-2">⚠️ Conflito de Horário Detectado</h4>
-                  <p class="text-red-700 leading-relaxed">{{ conflictMessage }}</p>
-                  <p class="text-red-600 text-sm mt-2 font-medium">Por favor, escolha um horário diferente ou outra
-                    sala.
-                  </p>
-                </div>
-              </div>
-            </div>
+           
 
             <!-- Botões de Ação -->
             <div class="flex flex-col mt-5 sm:flex-row gap-6 pt-8 border-t-2 border-gray-100">
@@ -455,6 +443,127 @@
               </button>
             </div>
           </div>
+ <!-- Modal de Sucesso -->
+    <transition name="modal-fade">
+      <div v-if="showSuccessModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="relative w-full max-w-md transform transition-all">
+          <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-white/10 animate-pulse"></div>
+              <div class="relative">
+                <div class="mx-auto w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 animate-bounce">
+                  <CheckIcon class="w-8 h-8 text-green-600" />
+                </div>
+                <h3 class="text-2xl font-bold text-white">Sucesso!</h3>
+              </div>
+            </div>
+            
+            <div class="p-6 text-center">
+              <p class="text-gray-700 text-lg mb-6">Reserva criada com sucesso!</p>
+              <button 
+                @click="closeSuccessModal"
+                class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                Entendido
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Modal de Erro -->
+    <transition name="modal-fade">
+      <div v-if="showErrorModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="relative w-full max-w-md transform transition-all">
+          <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-red-500 to-red-700 p-6 text-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-white/10 animate-pulse"></div>
+              <div class="relative">
+                <div class="mx-auto w-16 h-16 bg-white rounded-full flex items-center justify-center mb-3 animate-shake">
+                  <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+                </div>
+                <h3 class="text-2xl font-bold text-white">Atenção!</h3>
+              </div>
+            </div>
+            
+            <div class="p-6 text-center">
+              <p class="text-gray-700 text-lg mb-6">{{ errorMessage }}</p>
+              <button 
+                @click="closeErrorModal"
+                class="w-full bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                Entendido
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Modal de Conflito -->
+    <transition name="modal-fade">
+      <div v-if="showConflictModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="relative w-full max-w-lg transform transition-all">
+          <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-orange-500 to-red-600 p-6 relative overflow-hidden">
+              <div class="absolute inset-0 bg-white/10"></div>
+              <div class="relative flex items-center">
+                <div class="bg-white/20 p-3 rounded-full mr-4">
+                  <AlertTriangleIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-white">Conflito de Horário</h3>
+                  <p class="text-orange-100 text-sm">Esta sala já está reservada</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="bg-orange-50 border-2 border-orange-200 rounded-2xl p-4 mb-6">
+                <p class="text-gray-700 leading-relaxed">{{ conflictMessage }}</p>
+              </div>
+              
+              <button 
+                @click="closeConflictModal"
+                class="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg">
+                Escolher Outro Horário
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Toast -->
+    <transition name="slide-fade">
+      <div v-if="showToast" class="fixed top-4 right-4 z-50 max-w-md">
+        <div class="bg-white rounded-2xl shadow-2xl border-l-4 overflow-hidden"
+             :class="toastType === 'success' ? 'border-green-500' : 'border-red-500'">
+          <div class="p-4 flex items-center">
+            <div class="flex-shrink-0 mr-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                   :class="toastType === 'success' ? 'bg-green-100' : 'bg-red-100'">
+                <CheckIcon v-if="toastType === 'success'" class="w-5 h-5 text-green-600" />
+                <AlertTriangleIcon v-else class="w-5 h-5 text-red-600" />
+              </div>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900">{{ toastMessage }}</p>
+            </div>
+            <button @click="closeToast" class="ml-3 text-gray-400 hover:text-gray-600">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="h-1 bg-gray-200">
+            <div class="h-full transition-all duration-3000 ease-linear"
+                 :class="toastType === 'success' ? 'bg-green-500' : 'bg-red-500'"
+                 :style="{ width: toastProgress + '%' }"></div>
+          </div>
+        </div>
+      </div>
+    </transition>
+          
         </form>
       </div>
     </div>
@@ -519,6 +628,69 @@ const servicosCafe = ref([
   { text: 'Completo', value: 'completo' },
   { text: 'Personalizado', value: 'personalizado' }
 ])
+
+const showSuccessModal = ref(false)
+const showErrorModal = ref(false)
+const showConflictModal = ref(false)
+const errorMessage = ref('')
+
+// Estados do toast
+const showToast = ref(false)
+const toastMessage = ref('')
+const toastType = ref('success')
+const toastProgress = ref(100)
+let toastTimer = null
+
+// Funções dos modais - ADICIONAR AQUI
+const closeSuccessModal = () => {
+  showSuccessModal.value = false
+  voltarHome()
+}
+
+const closeErrorModal = () => {
+  showErrorModal.value = false
+}
+
+const closeConflictModal = () => {
+  showConflictModal.value = false
+  formData.value.start = ''
+  formData.value.end = ''
+}
+
+const clearConflict = () => {
+  conflictMessage.value = ''
+  formData.value.start = ''
+  formData.value.end = ''
+}
+
+// Função do toast
+const showToastNotification = (message, type = 'success') => {
+  toastMessage.value = message
+  toastType.value = type
+  showToast.value = true
+  toastProgress.value = 100
+  
+  if (toastTimer) clearInterval(toastTimer)
+  
+  const duration = 3000
+  const interval = 30
+  const decrement = (interval / duration) * 100
+  
+  toastTimer = setInterval(() => {
+    toastProgress.value -= decrement
+    if (toastProgress.value <= 0) {
+      closeToast()
+    }
+  }, interval)
+}
+
+const closeToast = () => {
+  showToast.value = false
+  if (toastTimer) {
+    clearInterval(toastTimer)
+    toastTimer = null
+  }
+}
 
 // Dados do formulário
 const formData = ref({
@@ -704,7 +876,7 @@ const checkConflicts = () => {
   
 
   if (conflicts.length > 0) {
-    alert("Nao pode reservar porqiue ja tem nese horario")
+    showConflictModal.value = true
     const conflict = conflicts[0]
     conflictMessage.value = `A sala "${formData.value.rooms}" já está reservada das ${conflict.horaInicio} às ${conflict.horaFinal} para "${conflict.tipoevento}"`
     formData.value.start = ''
@@ -728,14 +900,16 @@ watch([
 // Submissão do formulário
 const handleSubmit = () => {
   if (!isFormValid.value || conflictMessage.value) {
-    alert('Formulario invalido')
+    errorMessage.value = 'Por favor, preencha todos os campos obrigatórios corretamente.'
+showErrorModal.value = true
     return
   }
 
-  if (!formData.value.participantCount) {
-    alert('Numero de participantes não pode ser zero!')
-    return
-  }
+ if (!formData.value.participantCount || formData.value.participantCount <= 0) {
+  errorMessage.value = 'O número de participantes deve ser maior que zero!'
+  showErrorModal.value = true
+  return
+}
 
   const reservaData = {
     id: Date.now(),
@@ -758,7 +932,7 @@ const handleSubmit = () => {
   reservasExistentes.push(reservaData)
   localStorage.setItem('reservas_salas', JSON.stringify(reservasExistentes))
 
-  alert('Reserva criada com sucesso!')
+  showSuccessModal.value = true
 
   formData.value = {
     responsibleName: '',
@@ -875,4 +1049,56 @@ input[type="radio"]:checked {
     min-height: auto;
   }
 }
+
+/* Animações dos modais */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-fade-enter-active .bg-white,
+.modal-fade-leave-active .bg-white {
+  transition: transform 0.3s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-from .bg-white,
+.modal-fade-leave-to .bg-white {
+  transform: scale(0.9) translateY(20px);
+}
+
+/* Animações do toast */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Animação de shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
 </style>
