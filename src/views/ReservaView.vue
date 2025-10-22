@@ -641,7 +641,7 @@ const toastType = ref('success')
 const toastProgress = ref(100)
 let toastTimer = null
 
-// Funções dos modais - ADICIONAR AQUI
+// Funções dos modais 
 const closeSuccessModal = () => {
   showSuccessModal.value = false
   voltarHome()
@@ -726,7 +726,8 @@ const rooms = [
   'Sala RH',
   'Sala Manutenção',
   'Sala NIKE',
-  'Sala do BIP'
+  'Sala do BIP',
+  'Sala Compromisso',
 ]
 
 // Tipos de evento

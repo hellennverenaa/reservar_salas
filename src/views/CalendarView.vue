@@ -243,16 +243,17 @@ export default {
     getCorAleatoriaOuPorSala(sala) {
       const coresFixas = {
         'Sala Paixão': '#CC0000', // Vermelho
-        'Respeito': '#333333', // Preto
-        'Auditório F1': '#180000', // Vermelho escuro
-        'Auditório F2': '#000000', // Preto puro
-        'Auditório F3': '#FF3333', // Vermelho mais claro
-        'Hoshin': '#660000', // Vermelho muito escuro
-        'Sala ADM': '#444444', // Cinza escuro
-        'Sala RH': '#FF6666', // Vermelho médio
-        'Sala Manutenção': '#222222', // Quase preto
-        'Sala NIKE': '#FF0000', // Vermelho vibrante
-        'Sala do BIP': '#770000' // Vermelho terroso
+        'Respeito': '#FA8072', // Salmão
+        'Auditório F1': '#d7d350', // Amarelo hex
+        'Auditório F2': '#65a765', // Verde
+        'Auditório F3': '#48d1cc', // Turqueza média
+        'Hoshin': '#dda0dd', // Ameixa
+        'Sala ADM': '#808080', // Cinza
+        'Sala RH': '#9D00FF', // Roxo
+        'Sala Manutenção': '#0000FF', // Azul pura
+        'Sala NIKE': '#000000', // Preto
+        'Sala do BIP': '#7b0009', // Vermelho escuro
+        'Sala Compromisso': '#808000', // Olive
       };
 
       // Se a sala tiver uma cor fixa, use-a. Caso contrário, gere uma cor aleatória.
