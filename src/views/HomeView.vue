@@ -218,7 +218,7 @@ const mensagemNotificacao = ref('')
 const titulosPagina = {
   home: 'Página Inicial',
   reserva: 'Nova Reserva',
-  calendario: 'Calendário de Reservas'
+  calendario: 'Ver Calendário'
 }
 
 // Métodos de navegação
@@ -227,7 +227,7 @@ const irParaReserva = () => {
 }
 
 const irParaCalendario = () => {
-  paginaAtual.value = 'calendario'
+  router.push('/calendario') 
 }
 
 const voltarHome = () => {
