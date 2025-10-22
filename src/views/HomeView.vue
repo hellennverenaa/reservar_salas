@@ -159,7 +159,7 @@
           <div
             class="flex items-center justify-center space-x-3 text-gray-700 hover:text-red-600 transition-colors duration-300 group p-4 rounded-2xl hover:bg-red-50">
             <MapPinIcon class="w-5 h-5 group-hover:text-red-600 group-hover:scale-125 transition-all duration-300" />
-            <span class="font-semibold">🏢 11 Salas Disponíveis</span>
+            <span class="font-semibold">🏢 12 Salas Disponíveis</span>
           </div>
           <div
             class="flex items-center justify-center space-x-3 text-gray-700 hover:text-black transition-colors duration-300 group p-4 rounded-2xl hover:bg-gray-50">
@@ -174,8 +174,6 @@
         </div>
       </div>
     </div>
-
-
 
     <!-- Notificação de Sucesso -->
     <div v-if="mostrarNotificacao"
