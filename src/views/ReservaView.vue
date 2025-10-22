@@ -143,7 +143,7 @@
                 <!-- Sala -->
                 <div class="space-y-1">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
-                    Selecione a Sala
+                    Selecione a Sala*
                   </label>
                   <div class="relative">
                     <Listbox v-model="formData.rooms">
@@ -353,7 +353,7 @@
                 <!-- Número de Participantes -->
                 <div class="space-y-2 -mt-4">
                   <label class="block text-sm font-bold text-gray-800 mb-2">
-                    Número de Participantes
+                    Número de Participantes*
                   </label>
                   <div class="relative">
                     <input v-model="formData.participantCount" type="number" min="1" max="100"
