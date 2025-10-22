@@ -5,9 +5,9 @@
       w-full bg-gray-500 text-white shadow-lg fixed top-0 left-0 right-0 h-16 
       md:h-20 flex items-center justify-between px-4 md:px-8">
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <CalendarIcon class="w-6 h-6 text-red-900" />
-        <span class="text-lg md:text-xl font-semibold">Sistema de Reservas</span>
+        <span class="text-lg md:text-1xl font-semibold">Sistema de Reservas</span>
       </div>
 
       <nav class="hidden md:block">
