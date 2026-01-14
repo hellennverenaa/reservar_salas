@@ -35,7 +35,7 @@
             <!-- Status Badge -->
             <div
               class="bg-yellow-100 -mt-24 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold border-2 border-yellow-200">
-              ✨ Nova Reserva
+               Nova Reserva
             </div>
           </div>
 
@@ -92,7 +92,7 @@
                 <div class="bg-red-100 p-2 rounded-full mr-2">
                   <UserIcon class="w-4 h-4 text-red-600" />
                 </div>
-                <h3 class="text-base font-bold text-gray-900">👤 Informações Pessoais</h3>
+                <h3 class="text-base font-bold text-gray-900"> Informações Pessoais</h3>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -136,7 +136,7 @@
                 <div class="bg-black/10 p-2 rounded-full mr-2">
                   <MapPinIcon class="w-4 h-4 text-black" />
                 </div>
-                <h3 class="text-base font-bold text-gray-900">🏛️ Local e Data</h3>
+                <h3 class="text-base font-bold text-gray-900"> Local e Data</h3>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -208,7 +208,7 @@
                 <div class="bg-yellow-100 p-4 rounded-full mr-1">
                   <ClockIcon class="w-4 h-4 text-yellow-600" />
                 </div>
-                <h3 class="text-xl font-bold text-gray-900">⏰ Horários</h3>
+                <h3 class="text-xl font-bold text-gray-900"> Horários</h3>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-9">
@@ -244,7 +244,7 @@
                 <div class="bg-red-100 p-3 rounded-full mr-4">
                   <UsersIcon class="w-5 h-5 text-red-600" />
                 </div>
-                <h3 class="text-xl font-bold text-gray-900">👥 Detalhes do Evento</h3>
+                <h3 class="text-xl font-bold text-gray-900">Detalhes do Evento</h3>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -413,7 +413,7 @@
                 <div class="bg-yellow-100 p-3 rounded-full mr-4">
                   <MessageSquareIcon class="w-5 h-5 text-yellow-600" />
                 </div>
-                <h3 class="text-xl font-bold text-gray-900">📝 Observações</h3>
+                <h3 class="text-xl font-bold text-gray-900"> Observações</h3>
               </div>
 
               <div class="relative">

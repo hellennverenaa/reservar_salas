@@ -58,8 +58,8 @@
               </span>
             </h1>
             <p class="text-gray-700 max-w-xl mx-auto leading-relaxed text-1xl">
-              🏢 Gerencie reservas de salas de forma profissional e eficiente.
-              ⚡ Sistema empresarial robusto para controle total de recursos.
+               Gerencie reservas de salas de forma profissional e eficiente.
+               Sistema empresarial robusto para controle total de recursos.
             </p>
           </div>
 
@@ -120,7 +120,7 @@
                 <CalendarIcon class="w-6 h-6 text-white" />
               </div>
 
-              <h3 class="text-black mb-3 text-base font-bold">📅 Agenda Integrada</h3>
+              <h3 class="text-black mb-3 text-base font-bold"> Agenda Integrada</h3>
               <p class="text-gray-700 leading-tight text-sm">
                 Visualize disponibilidade em tempo real com nosso calendário profissional
               </p>
@@ -133,7 +133,7 @@
                 class="bg-black w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-800 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:-rotate-6">
                 <ClockIcon class="w-6 h-6 text-white" />
               </div>
-              <h3 class="text-black mb-3 text-base font-bold">⚡ Reserva Rápida</h3>
+              <h3 class="text-black mb-3 text-base font-bold"> Reserva Rápida</h3>
               <p class="text-gray-700 leading-tight text-sm">
                 Agende reuniões em poucos cliques com nosso sistema eficiente
               </p>
@@ -146,7 +146,7 @@
                 class="bg-red-700 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-red-800 transition-all duration-500 shadow-md group-hover:scale-105 group-hover:rotate-6">
                 <UsersIcon class="w-6 h-6 text-white" />
               </div>
-              <h3 class="text-black mb-3 text-base font-bold">👥 Controle Total</h3>
+              <h3 class="text-black mb-3 text-base font-bold"> Controle Total</h3>
               <p class="text-gray-700 leading-tight text-sm">
                 Gestão completa de participantes e recursos corporativos
               </p>
@@ -159,17 +159,17 @@
           <div
             class="flex items-center justify-center space-x-3 text-gray-700 hover:text-red-600 transition-colors duration-300 group p-4 rounded-2xl hover:bg-red-50">
             <MapPinIcon class="w-5 h-5 group-hover:text-red-600 group-hover:scale-125 transition-all duration-300" />
-            <span class="font-semibold">🏢 12 Salas Disponíveis</span>
+            <span class="font-semibold"> 12 Salas Disponíveis</span>
           </div>
           <div
             class="flex items-center justify-center space-x-3 text-gray-700 hover:text-black transition-colors duration-300 group p-4 rounded-2xl hover:bg-gray-50">
             <DatabaseIcon class="w-5 h-5 group-hover:text-black group-hover:scale-125 transition-all duration-300" />
-            <span class="font-semibold">💾 Dados Salvos Localmente</span>
+            <span class="font-semibold"> Dados Salvos Localmente</span>
           </div>
           <div
             class="flex items-center justify-center space-x-3 text-gray-700 hover:text-red-700 transition-colors duration-300 group p-4 rounded-2xl hover:bg-red-50">
             <ShieldIcon class="w-5 h-5 group-hover:text-red-700 group-hover:scale-125 transition-all duration-300" />
-            <span class="font-semibold">🛡️ 100% Seguro</span>
+            <span class="font-semibold"> 100% Seguro</span>
           </div>
         </div>
       </div>
