@@ -33,7 +33,7 @@
       <div class="flex gap-2 sm:gap-3">
         <button
           @click="irParaHoje"
-          class="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white px-3 sm:px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition-all duration-200"
+          class="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white px-3 sm:px-4 py-2 rounded-xl text-sm font-medium shadow-sm transition-all duration-200"
         >
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -97,7 +97,7 @@
             <!-- Corpo do modal -->
             <div class="p-6" v-if="reservaSelecionada">
               <div class="grid grid-cols-2 gap-3">
-                <div class="col-span-2 bg-gray-50 rounded-xl p-3 border-l-4 border-indigo-500">
+                <div class="col-span-2 bg-gray-50 rounded-xl p-3 border-l-4 border-red-500">
                   <span class="text-xs font-medium text-gray-500 uppercase tracking-wide">Sala</span>
                   <p class="text-sm font-semibold text-gray-900 mt-1">{{ reservaSelecionada.sala }}</p>
                 </div>
@@ -155,7 +155,7 @@
               </button>
               <button
                 @click="editarReserva"
-                class="px-4 py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-sm transition-all duration-200"
+                class="px-4 py-2 text-sm font-medium bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-sm transition-all duration-200"
               >
                 Editar
               </button>
@@ -470,13 +470,13 @@ onBeforeUnmount(() => {
 }
 
 :deep(.fc-button-primary) {
-  @apply bg-indigo-600 border-indigo-600 hover:bg-indigo-700 hover:border-indigo-700
+  @apply bg-red-600 border-red-600 hover:bg-red-700 hover:border-red-700
          text-sm font-medium px-3 py-2 rounded-xl transition-all duration-200 shadow-sm;
 }
 
 :deep(.fc-button-primary:not(:disabled):active),
 :deep(.fc-button-primary:not(:disabled).fc-button-active) {
-  @apply bg-indigo-800 border-indigo-800;
+  @apply bg-red-800 border-red-800;
 }
 
 :deep(.fc-toolbar-title) {
